@@ -7,6 +7,13 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <meta property="og:title" content="Виртуальный 360° Тур по Музею Гимназии №6">
+    <meta property="og:description" content="Исследуйте экспозицию музея «Вооруженные Силы Республики Беларусь» в полном 360-градусном формате. Смотрите ключевые экспонаты онлайн!">
+    <meta property="og:type" content="article"> 
+    <meta property="og:url" content="{{ url_for('museum_map', _external=True) }}">
+    <meta property="og:image" content="{{ url_for('static', filename='museum-pano-cover.jpg', _external=True) }}">
+    <meta property="og:site_name" content="ГУО «Гимназия №6 г. Минска»">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     
