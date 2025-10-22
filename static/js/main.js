@@ -136,11 +136,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    const revealTargets = document.querySelectorAll('.section-content');
+    // Цели для анимации: общий контент секций и изображения ВПК
+    const revealTargets = document.querySelectorAll('.section-content, .vpk-gallery img');
 
     revealTargets.forEach(target => {
         // Пропускаем первую секцию (about), так как она уже имеет класс 'show' в HTML
-        if (target.id !== 'about') {
+        if (target.closest('#about') && target.classList.contains('section-content')) {
+            // Ничего не делаем, 'about' уже имеет 'show'
+        } else {
             observer.observe(target);
         }
     });

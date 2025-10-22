@@ -28,7 +28,6 @@
 
     <header class="header">
         <div class="logo">
-            <img src="{{ url_for('static', filename='logo_gymn.png') }}" alt="Логотип Гимназии №6" class="gymnasium-logo" style="height: 50px; margin-right: 15px;"> 
             Гимназия №6 г. Минска
         </div>
         <button class="hamburger" aria-label="Открыть меню">
@@ -49,13 +48,13 @@
     
     <section id="hero-slider" class="slider-section">
         <div class="slider-container">
-            <div class="slide fade" style="background-image: url('static/slide1.png');">
+            <div class="slide fade" style="background-image: url('static/slide1.jpg');">
                 <div class="slide-caption">Добро пожаловать в Гимназию №6</div>
             </div>
-            <div class="slide fade" style="background-image: url('static/slide2.png');">
+            <div class="slide fade" style="background-image: url('static/slide2.jpg');">
                 <div class="slide-caption">Высокие стандарты образования</div>
             </div>
-            <div class="slide fade" style="background-image: url('static/slide3.png');">
+            <div class="slide fade" style="background-image: url('static/slide3.jpg');">
                 <div class="slide-caption">Воспитание патриотов и граждан</div>
             </div>
         </div>
@@ -65,6 +64,10 @@
 
     <section id="about" class="section about">
         <div class="section-content show">
+            <div class="logo-container" style="text-align: center; margin-bottom: 20px;">
+                <img src="{{ url_for('static', filename='logo_gymn.png') }}" alt="Логотип Гимназии №6" class="gymnasium-main-logo" style="max-width: 150px; height: auto;"> 
+            </div>
+            
             <h1>Гимназия №6 г. Минска</h1>
             <p>
                 Государственное учреждение образования <strong>«Гимназия №6 г. Минска»</strong> — это современное учебное заведение с богатой историей, основанное на базе общеобразовательной школы №6 в 1991 году. Гимназия известна высоким уровнем образования, с 2024 года ее возглавляет директор <strong>Казак Наталья Болеславовна</strong>.
@@ -87,10 +90,10 @@
                 Музей был открыт в гимназии №6 с целью сохранения памяти о героическом прошлом белорусского народа и воспитания патриотизма.
             </p>
             <div class="gallery">
-                <img src="static/image.png" alt="Экспонат музея: форма и награды">
-                <img src="static/image(1).png" alt="Витрина с историческими документами">
-                <img src="static/image(2).png" alt="Оформление экспозиции музея">
-                <img src="static/image(3).png" alt="Учащиеся на экскурсии в музее">
+                <img src="static/museum1.jpg" alt="Экспонат музея: форма и награды">
+                <img src="static/museum2.jpg" alt="Витрина с историческими документами">
+                <img src="static/museum3.jpg" alt="Оформление экспозиции музея">
+                <img src="static/museum4.jpg" alt="Учащиеся на экскурсии в музее">
             </div>
             <p>
                 В экспозиции представлены уникальные <strong>экспонаты</strong>, переданные сотрудниками, родителями учащихся, а также организациями-партнерами. Музей имеет несколько разделов, посвященных <strong>истории белорусской армии</strong>, начиная с 1918 года. Он служит важным центром <strong>музейной педагогики</strong> для формирования у ребят национального стержня, готовности защищать Родину и беречь мир.
@@ -112,8 +115,10 @@
             
             <div class="vpk-gallery" style="display: flex; flex-wrap: wrap; justify-content: space-around; gap: 15px; margin-bottom: 25px;">
                 <img src="{{ url_for('static', filename='vpk_logo.jpg') }}" alt="Логотип ВПК «Гранит»" style="max-width: 250px; height: auto;">
-                <img src="{{ url_for('static', filename='slide1.png') }}" alt="Фотография отряда «Гранит» 1" style="max-width: 30%; height: auto; object-fit: cover;">
-                <img src="{{ url_for('static', filename='slide2.png') }}" alt="Фотография отряда «Гранит» 2" style="max-width: 30%; height: auto; object-fit: cover;">
+                <img src="{{ url_for('static', filename='granit1.jpg') }}" alt="Фотография отряда «Гранит» 1" style="max-width: 30%; height: auto; object-fit: cover;">
+                <img src="{{ url_for('static', filename='granit2.jpg') }}" alt="Фотография отряда «Гранит» 2" style="max-width: 30%; height: auto; object-fit: cover;">
+                <img src="{{ url_for('static', filename='granit3.jpg') }}" alt="Фотография отряда «Гранит» 3" style="max-width: 30%; height: auto; object-fit: cover;">
+                <img src="{{ url_for('static', filename='granit4.jpg') }}" alt="Фотография отряда «Гранит» 4" style="max-width: 30%; height: auto; object-fit: cover;">
             </div>
             <p>
                 <strong>ВПК «Гранит»</strong> был создан на базе Гимназии №6 г. Минска с целью <strong>военно-патриотического воспитания</strong> молодежи. Клуб имеет собственные <strong>отличительные символы и атрибуты</strong> (наименование, девиз, эмблема, форма).
