@@ -7,6 +7,12 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+# МАРШРУТ ДЛЯ НОВОЙ СТРАНИЦЫ
+@app.route('/museum-map')
+def museum_map():
+    # Предполагается, что у вас создан файл templates/museum_map.html
+    return render_template('museum_map.html')
+
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),

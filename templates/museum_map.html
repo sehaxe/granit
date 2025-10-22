@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивная карта и 3D-тур | Музей</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    
+    <style>
+        /* Дополнительные стили для этой страницы */
+        .map-iframe-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 30px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        /* Контейнер для панорамы */
+        #panorama-viewer {
+            width: 100%;
+            height: 65vh; /* Высота 65% от высоты видимой области */
+            display: block;
+            border: none;
+        }
+        
+        .map-note {
+            max-width: 800px;
+            margin: 20px auto 40px;
+            padding: 15px;
+            background-color: #f0f8ff;
+            border-left: 5px solid var(--bg-primary);
+            border-radius: 4px;
+            text-align: left;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">Гимназия №6 г. Минска</div>
+        <button class="hamburger" aria-label="Открыть меню">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav class="nav">
+            <a href="/#about">О гимназии</a>
+            <a href="/#museum">Музей</a>
+            <a href="/museum-map">Интерактивная карта</a> <a href="/#vpk">ВПК «Гранит»</a>
+            <a href="/#contacts">Контакты</a>
+        </nav>
+    </header>
+
+    <main class="section" style="padding-top: 150px;">
+        <div class="section-content show">
+            <h1>Виртуальный 360° тур по музею</h1>
+            
+            <p class="map-note">
+                Исследуйте экспозицию музея «Вооруженные Силы Республики Беларусь» в формате 360-градусной панорамы. Используйте мышь или сенсорный экран для осмотра.
+            </p>
+            
+            <div class="map-iframe-container">
+                <div id="panorama-viewer"></div>
+            </div>
+            
+            <div class="button-container" style="text-align: center; margin-top: 40px;">
+                <a href="/#museum" class="btn primary-btn" style="background-color: var(--accent); color: var(--bg-primary);">
+                    <i class="fas fa-arrow-left"></i> Вернуться к информации о музее
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Гимназия №6 г. Минска. Все права защищены.</p>
+    </footer>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    
+    <script>
+        window.onload = function() {
+            // !!! ВАЖНО: ЗАМЕНИТЕ 'museum-pano.jpg' НА ИМЯ ВАШЕГО ФАЙЛА
+            pannellum.viewer('panorama-viewer', {
+                "type": "equirectangular",
+                "panorama": "{{ url_for('static', filename='museum-pano.jpg') }}", 
+                "autoLoad": true,
+                "compass": true,
+                "hfov": 100, // Начальный угол обзора
+                "yaw": 180   // Начальный поворот (середина фото)
+            });
+        };
+    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script> 
+</body>
+</html>

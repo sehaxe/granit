@@ -254,6 +254,38 @@ header .logo {
     line-height: 1.5;
 }
 
+/* Стили для КНОПОК */
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: none;
+    letter-spacing: 0.5px;
+}
+
+.primary-btn {
+    background-color: var(--bg-primary); /* Темно-синий цвет гимназии */
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 51, 102, 0.4);
+}
+
+.primary-btn:hover {
+    background-color: #004d99; /* Светлее при наведении */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 51, 102, 0.6);
+}
+
+.primary-btn i {
+    margin-left: 10px;
+}
+/* Конец Стили для КНОПОК */
+
+
 /* Карта в контактах */
 .map-container {
     width: 100%;
@@ -320,6 +352,7 @@ header .logo {
 .section-content.show .gallery img:nth-child(3) { transition-delay: 0.7s; }
 .section-content.show .gallery img:nth-child(4) { transition-delay: 0.8s; }
 .section-content.show .map-container { transition-delay: 0.5s; }
+.section-content.show .button-container .btn { transition-delay: 0.9s; }
 
 
 /* -------------------------------------- */

@@ -1,5 +1,3 @@
-// main.js
-
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.querySelector('header');
     const navLinks = document.querySelectorAll('.nav a');
@@ -37,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         slideTimer = setInterval(() => {
             slideIndex++;
             showSlides(slideIndex);
-        }, 7000); // Смена каждые 5 секунд
+        }, 7000); // Смена каждые 7 секунд
     }
     
     function currentSlide(n) {
@@ -76,9 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     navLinks.forEach(link => {
         link.addEventListener('click', function () {
-            // !!! ГЛАВНЫЙ ФИКС: Удаляем e.preventDefault() и ручную прокрутку.
-            // Браузер сам выполнит переход по href="#id".
-            
+            // Браузер сам выполнит переход по href="#id" или "/url".
             // Просто закрываем меню.
             closeMobileMenu(); 
         });
