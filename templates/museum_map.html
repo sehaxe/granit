@@ -55,6 +55,15 @@
 </head>
 <body>
     
+    <div id="preloader">
+        <div class="loader-ring">
+            <div class="loader-dot"></div>
+            <div class="loader-dot"></div>
+            <div class="loader-dot"></div>
+            <div class="loader-dot"></div>
+        </div>
+    </div>
+
     <header class="header">
         <div class="logo">Гимназия №6 г. Минска</div>
         <button class="hamburger" aria-label="Открыть меню">
@@ -140,20 +149,49 @@
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    
     <script>
+        // Функция для скрытия прелоадера
+        function hidePreloader() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                // Добавляем класс, чтобы запустить плавное исчезновение (см. CSS)
+                document.body.classList.add('loaded'); 
+                // Полностью убираем через 500ms (по времени CSS-перехода)
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }
+        }
+        
         window.onload = function() {
-            // !!! ВАЖНО: ЗАМЕНИТЕ 'museum-pano.jpg' НА ИМЯ ВАШЕГО ФАЙЛА (он должен быть в static/)
-            // Проверяем, существует ли контейнер, прежде чем инициализировать Pannellum (для предотвращения ошибок на главной)
+            // !!! ВАЖНО: ЗАМЕНИТЕ 'museum-pano.jpg' НА ИМЯ ВАШЕГО ФАЙЛА
             if (document.getElementById('panorama-viewer')) {
-                pannellum.viewer('panorama-viewer', {
+                // Инициализируем Pannellum (он загружает панораму)
+                const viewer = pannellum.viewer('panorama-viewer', {
                     "type": "equirectangular",
-                    // ИЗМЕНЕНО: Добавлен путь 
                     "panorama": "{{ url_for('static', filename='museum-pano.jpg') }}", 
                     "autoLoad": true,
                     "compass": true,
                     "hfov": 100, 
                     "yaw": 180 
                 });
+                
+                // Скрываем прелоадер после загрузки панорамы 
+                // (Pannellum испускает событие load)
+                viewer.on('load', function() {
+                    hidePreloader();
+                });
+                
+                // Дополнительно: если Pannellum не сработает или не будет контейнера, 
+                // скрываем прелоадер через стандартный window.onload (запасной вариант)
+                // Если pannellum не загрузил, сработает, когда загрузятся картинки экспонатов
+                setTimeout(hidePreloader, 2500); // Скрываем через 2.5 секунды, если нет события load
+                
+            } else {
+                // Если контейнера панорамы нет, скрываем по стандартному window.onload
+                hidePreloader(); 
             }
         };
     </script>
