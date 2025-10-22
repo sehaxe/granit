@@ -163,6 +163,7 @@ header .logo {
     margin: 0 auto;
 }
 
+/* Стиль для первой секции (главной) */
 #about {
     padding-top: 150px;
     background-color: #f7f7f7; 
