@@ -25,9 +25,10 @@
 }
 
 html, body {
+    text-align: left;
     height: 100%;
     /* Применяем шрифт Cantarell */
-    font-family: 'Cantarell', sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: var(--text-color);
     background: var(--bg-secondary);
     line-height: 1.6;
@@ -100,6 +101,7 @@ header .nav a:hover::after {
     max-width: 100%;
     margin: 0 auto;
 }
+
 
 /* Стиль для первой секции (главной) */
 #about {
