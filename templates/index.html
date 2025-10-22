@@ -6,15 +6,23 @@
     <title>Гимназия №6 г. Минска</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
     <style>
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; } 
     </style>
 </head>
 <body>
+    
+    <div id="preloader">
+        <div class="loader-spinner"></div>
+    </div>
 
     <header class="header">
         <div class="logo">Гимназия №6 г. Минска</div>
+        <button class="hamburger" aria-label="Открыть меню">
+            <i class="fas fa-bars"></i>
+        </button>
         <nav class="nav">
             <a href="#about">О гимназии</a>
             <a href="#museum">Музей</a>
@@ -22,6 +30,26 @@
             <a href="#contacts">Контакты</a>
         </nav>
     </header>
+    
+    <button id="scroll-to-top" aria-label="Прокрутить наверх">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <section id="hero-slider" class="slider-section">
+        <div class="slider-container">
+            <div class="slide fade" style="background-image: url('static/slide1.png');">
+                <div class="slide-caption">Добро пожаловать в Гимназию №6</div>
+            </div>
+            <div class="slide fade" style="background-image: url('static/slide2.png');">
+                <div class="slide-caption">Высокие стандарты образования</div>
+            </div>
+            <div class="slide fade" style="background-image: url('static/slide3.png');">
+                <div class="slide-caption">Воспитание патриотов и граждан</div>
+            </div>
+        </div>
+        <div class="slider-dots-container">
+            </div>
+    </section>
 
     <section id="about" class="section about">
         <h1>Гимназия №6 г. Минска</h1>
@@ -36,25 +64,27 @@
         </p>
     </section>
 
-    <hr>
+    <div class="section-divider"></div>
 
     <section id="museum" class="section museum">
-        <h2>Музей «Вооруженные Силы Республики Беларусь»</h2>
-        <p>
-            Музей был открыт в гимназии №6 с целью сохранения памяти о героическом прошлом белорусского народа и воспитания патриотизма.
-        </p>
-        <div class="gallery">
-            <img src="static/image.png" alt="Экспонат музея 1">
-            <img src="static/image(1).png" alt="Экспонат музея 2">
-            <img src="static/image(2).png" alt="Экспонат музея 3">
-            <img src="static/image(3).png" alt="Экскурсия в музее">
+        <div class="section-content">
+            <h2>Музей «Вооруженные Силы Республики Беларусь»</h2>
+            <p>
+                Музей был открыт в гимназии №6 с целью сохранения памяти о героическом прошлом белорусского народа и воспитания патриотизма.
+            </p>
+            <div class="gallery">
+                <img src="static/image.png" alt="Экспонат музея: форма и награды">
+                <img src="static/image(1).png" alt="Витрина с историческими документами">
+                <img src="static/image(2).png" alt="Оформление экспозиции музея">
+                <img src="static/image(3).png" alt="Учащиеся на экскурсии в музее">
+            </div>
+            <p>
+                В экспозиции представлены уникальные <strong>экспонаты</strong>, переданные сотрудниками, родителями учащихся, а также организациями-партнерами. Музей имеет несколько разделов, посвященных <strong>истории белорусской армии</strong>, начиная с 1918 года. Он служит важным центром <strong>музейной педагогики</strong> для формирования у ребят национального стержня, готовности защищать Родину и беречь мир.
+            </p>
         </div>
-        <p>
-            В экспозиции представлены уникальные <strong>экспонаты</strong>, переданные сотрудниками, родителями учащихся, а также организациями-партнерами. Музей имеет несколько разделов, посвященных <strong>истории белорусской армии</strong>, начиная с 1918 года. Он служит важным центром <strong>музейной педагогики</strong> для формирования у ребят национального стержня, готовности защищать Родину и беречь мир.
-        </p>
     </section>
 
-    <hr>
+    <div class="section-divider"></div>
 
     <section id="vpk" class="section vpk">
         <h2>Военно-патриотический клуб «Гранит»</h2>
@@ -78,35 +108,35 @@
         </p>
     </section>
 
-    <hr>
+    <div class="section-divider"></div>
 
     <section id="contacts" class="section contacts">
-        <h2>Контакты и Адреса</h2>
-        <p>
-            <strong>ГУО «Гимназия №6 г. Минска»</strong> расположена в трех учебных корпусах:
-            <ul>
-                <li><strong>Корпус №1:</strong> г. Минск, <strong>ул. Восточная, 40</strong>.</li>
-                <li><strong>Корпус №2:</strong> г. Минск, <strong>ул. Некрасова, 24</strong>.</li>
-                <li><strong>Корпус №3:</strong> г. Минск, <strong>ул. Некрасова, 24/1</strong>.</li>
-            </ul>
-        </p>
-        <p>
-            <strong>Основной адрес (К.1):</strong> 220113, Республика Беларусь, г. Минск, ул. Восточная, 40.
-        </p>
-        <p>
-            <strong>Контактные телефоны:</strong>
-            <ul>
-                <li>Приемная директора (К.1): +375 17 242-73-29</li>
-                <li>Секретарь учебной части (К.1): +375 17 242-30-61</li>
-                <li>Вахта (К.3): +375 17 292-87-91</li>
-            </ul>
-        </p>
-        <p>
-            <strong>Официальный сайт:</strong> <a href="http://gymn6.minsk.edu.by/" target="_blank">http://gymn6.minsk.edu.by/</a>
-        </p>
+        <div class="section-content">
+            <h2>Контакты и Адреса</h2>
+            <p>
+                <strong>ГУО «Гимназия №6 г. Минска»</strong> расположена в трех учебных корпусах:
+                <ul>
+                    <li><strong>Корпус №1:</strong> г. Минск, <strong>ул. Восточная, 40</strong>.</li>
+                    <li><strong>Корпус №2:</strong> г. Минск, <strong>ул. Некрасова, 24</strong>.</li>
+                    <li><strong>Корпус №3:</strong> г. Минск, <strong>ул. Некрасова, 24/1</strong>.</li>
+                </ul>
+            </p>
+            <p>
+                <strong>Основной адрес (К.1):</strong> 220113, Республика Беларусь, г. Минск, ул. Восточная, 40.
+            </p>
+            <p>
+                <strong>Контактные телефоны:</strong>
+                <ul>
+                    <li>Приемная директора (К.1): +375 17 242-73-29</li>
+                    <li>Секретарь учебной части (К.1): +375 17 242-30-61</li>
+                    <li>Вахта (К.3): +375 17 292-87-91</li>
+                </ul>
+            </p>
+            <p>
+                <strong>Официальный сайт:</strong> <a href="http://gymn6.minsk.edu.by/" target="_blank">http://gymn6.minsk.edu.by/</a>
+            </p>
+        </div>
     </section>
-
-    <hr>
 
     <footer class="footer">
         <p>&copy; 2025 Гимназия №6 г. Минска. Все права защищены.</p>
