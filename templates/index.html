@@ -76,7 +76,7 @@
                 Гимназия располагается в трех учебных корпусах в Советском районе столицы. Учреждение активно развивает систему <strong>идеологической и воспитательной работы</strong>. На базе гимназии существуют такие структуры, как <strong>отряд БРПО имени Зинаиды Портновой</strong>, <strong>военно-патриотический клуб «Гранит»</strong>,
              <strong>первичная организация ОО БРСМ Гимназии № 6 г. Минска</strong>, </strong>первичная организация РОО "Белая Русь" ГУО "Гимназии N6"</strong>.</p>
             <p>
-                <strong>Руководителем по военно-патриотическому воспитанию</strong> в гимназии является полковник запаса Вооруженных Сил Республики Беларусь </strong>Халипов Сергей Сергеевич</strong>. Руководитель по военно-патриотическому воспитанию является руководителем ВПК «Гранит», отвестсвеннным за военно-патриотическое воспитание молодежи, а также за функционирование музея.
+                <strong>Руководителем по военно-патриотическому воспитанию</strong> в гимназии является полковник запаса Вооруженных Сил Республики Беларусь </strong>Халипов Сергей Сергеевич</strong>. Руководитель по военно-патриотическому воспитанию является руководителем ВПК «Гранит», отвестсвенным за военно-патриотическое воспитание молодежи, а также за функционирование музея.
             </p>
         </div>
     </section>
@@ -104,7 +104,7 @@
                     Интерактивная карта музея <i class="fas fa-map-marked-alt"></i>
                 </a>
             </div>
-            </div>
+        </div>
     </section>
 
     <div class="section-divider"></div>
@@ -113,13 +113,17 @@
         <div class="section-content">
             <h2>Военно-патриотический клуб «Гранит»</h2>
             
-            <div class="vpk-gallery" style="display: flex; flex-wrap: wrap; justify-content: space-around; gap: 15px; margin-bottom: 25px;">
-                <img src="{{ url_for('static', filename='vpk_logo.jpg') }}" alt="Логотип ВПК «Гранит»" style="max-width: 250px; height: auto;">
-                <img src="{{ url_for('static', filename='granit1.jpg') }}" alt="Фотография отряда «Гранит» 1" style="max-width: 30%; height: auto; object-fit: cover;">
-                <img src="{{ url_for('static', filename='granit2.jpg') }}" alt="Фотография отряда «Гранит» 2" style="max-width: 30%; height: auto; object-fit: cover;">
-                <img src="{{ url_for('static', filename='granit3.jpg') }}" alt="Фотография отряда «Гранит» 3" style="max-width: 30%; height: auto; object-fit: cover;">
-                <img src="{{ url_for('static', filename='granit4.jpg') }}" alt="Фотография отряда «Гранит» 4" style="max-width: 30%; height: auto; object-fit: cover;">
+            <div class="logo-container" style="text-align: center; margin-bottom: 20px;">
+                <img src="{{ url_for('static', filename='vpk_logo.jpg') }}" alt="Логотип ВПК «Гранит»" class="vpk-main-logo">
             </div>
+
+            <div class="gallery"> 
+                <img src="{{ url_for('static', filename='granit1.jpg') }}" alt="Фотография отряда «Гранит» 1">
+                <img src="{{ url_for('static', filename='granit2.jpg') }}" alt="Фотография отряда «Гранит» 2">
+                <img src="{{ url_for('static', filename='granit3.jpg') }}" alt="Фотография отряда «Гранит» 3">
+                <img src="{{ url_for('static', filename='granit4.jpg') }}" alt="Фотография отряда «Гранит» 4">
+            </div>
+            
             <p>
                 <strong>ВПК «Гранит»</strong> был создан на базе Гимназии №6 г. Минска с целью <strong>военно-патриотического воспитания</strong> молодежи. Клуб имеет собственные <strong>отличительные символы и атрибуты</strong> (наименование, девиз, эмблема, форма).
             </p>
