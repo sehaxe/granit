@@ -10,6 +10,14 @@
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     
+    <link rel="icon" href="{{ url_for('favicon') }}" type="image/x-icon">
+    <link rel="icon" sizes="16x16" href="{{ url_for('favicon_16') }}" type="image/png">
+    <link rel="icon" sizes="32x32" href="{{ url_for('favicon_32') }}" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('apple_touch_icon') }}" type="image/png">
+    <link rel="icon" sizes="192x192" href="{{ url_for('android_chrome_192') }}" type="image/png">
+    <link rel="icon" sizes="512x512" href="{{ url_for('android_chrome_512') }}" type="image/png">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
+
     <style>
         /* Дополнительные стили для этой страницы */
         .map-iframe-container {
@@ -25,7 +33,7 @@
         /* Контейнер для панорамы */
         #panorama-viewer {
             width: 100%;
-            height: 65vh; /* Высота 65% от высоты видимой области */
+            height: 65vh; 
             display: block;
             border: none;
         }
@@ -40,6 +48,9 @@
             text-align: left;
             font-style: italic;
         }
+        
+        /* Стили для сетки экспонатов - теперь определены в style.css как exhibit-list */
+        
     </style>
 </head>
 <body>
@@ -52,7 +63,8 @@
         <nav class="nav">
             <a href="/#about">О гимназии</a>
             <a href="/#museum">Музей</a>
-            <a href="/museum-map">Интерактивная карта</a> <a href="/#vpk">ВПК «Гранит»</a>
+            <a href="/museum-map">Интерактивная карта</a>
+            <a href="/#vpk">ВПК «Гранит»</a>
             <a href="/#contacts">Контакты</a>
         </nav>
     </header>
@@ -78,6 +90,50 @@
         </div>
     </main>
 
+    <div class="section-divider"></div>
+
+    <section id="exhibits" class="section exhibits">
+        <div class="section-content show">
+            <h2>Ключевые экспонаты</h2>
+            <p style="text-align: center;">
+                Ниже представлены некоторые из самых значимых и уникальных экспонатов, собранных в нашем музее, с подробными описаниями их истории и значения.
+            </p>
+
+            <div class="exhibit-list">
+                
+                <div class="exhibit-item">
+                    <img src="{{ url_for('static', filename='exhibit1.png') }}" alt="Образец военной формы">
+                    <div class="exhibit-info">
+                        <h3>Форма офицера БВО</h3>
+                        <p>
+                            Парадная форма старшего офицера Белорусского военного округа 1980-х годов. Представлена с полным комплектом наград, символизируя героический путь советских и белорусских военнослужащих.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="exhibit-item">
+                    <img src="{{ url_for('static', filename='exhibit2.png') }}" alt="Исторические документы">
+                    <div class="exhibit-info">
+                        <h3>Исторические документы</h3>
+                        <p>
+                            Оригинальные документы, включая приказы, письма и удостоверения личности участников Великой Отечественной войны, переданные в дар музею ветеранами Советского района.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="exhibit-item">
+                    <img src="{{ url_for('static', filename='exhibit3.png') }}" alt="Макет военной техники">
+                    <div class="exhibit-info">
+                        <h3>Макет танка Т-34</h3>
+                        <p>
+                            Подробный макет легендарного танка Т-34, символа победы в Великой Отечественной войне. Макет используется для наглядного изучения военной истории и техники.
+                        </p>
+                    </div>
+                </div>
+                
+                </div>
+        </div>
+    </section>
     <footer class="footer">
         <p>&copy; 2025 Гимназия №6 г. Минска. Все права защищены.</p>
     </footer>
@@ -86,15 +142,19 @@
     
     <script>
         window.onload = function() {
-            // !!! ВАЖНО: ЗАМЕНИТЕ 'museum-pano.jpg' НА ИМЯ ВАШЕГО ФАЙЛА
-            pannellum.viewer('panorama-viewer', {
-                "type": "equirectangular",
-                "panorama": "{{ url_for('static', filename='museum-pano.jpg') }}", 
-                "autoLoad": true,
-                "compass": true,
-                "hfov": 100, // Начальный угол обзора
-                "yaw": 180   // Начальный поворот (середина фото)
-            });
+            // !!! ВАЖНО: ЗАМЕНИТЕ 'museum-pano.jpg' НА ИМЯ ВАШЕГО ФАЙЛА (он должен быть в static/)
+            // Проверяем, существует ли контейнер, прежде чем инициализировать Pannellum (для предотвращения ошибок на главной)
+            if (document.getElementById('panorama-viewer')) {
+                pannellum.viewer('panorama-viewer', {
+                    "type": "equirectangular",
+                    // ИЗМЕНЕНО: Добавлен путь 
+                    "panorama": "{{ url_for('static', filename='museum-pano.jpg') }}", 
+                    "autoLoad": true,
+                    "compass": true,
+                    "hfov": 100, 
+                    "yaw": 180 
+                });
+            }
         };
     </script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script> 

@@ -296,7 +296,7 @@ header .logo {
     display: block;
 }
 
-/* --- GALLERY / IMAGES --- */
+/* --- GALLERY / IMAGES (Секция Музея)--- */
 
 .gallery {
     display: grid;
@@ -324,6 +324,83 @@ header .logo {
     box-shadow: var(--shadow-dark); 
     border-color: var(--accent); 
 }
+
+/* --- НОВЫЕ СТИЛИ ДЛЯ СЕКЦИИ ЭКСПОНАТОВ (museum_map.html) --- */
+
+/* ИЗМЕНЕНИЕ: Заменяем .exhibit-grid на .exhibit-list и удаляем grid-свойства */
+.exhibit-list {
+    display: flex; /* Используем flexbox для управления вертикальным списком */
+    flex-direction: column; /* Элементы идут сверху вниз */
+    align-items: center; /* Центрируем экспонаты по горизонтали */
+    gap: 50px; /* Увеличиваем расстояние между элементами */
+    margin: 40px auto 20px;
+    max-width: 900px; /* Устанавливаем разумную ширину для элемента списка */
+    width: 90%;
+    padding: 0 20px;
+}
+
+.exhibit-item {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: left;
+    box-shadow: var(--shadow-light);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    width: 100%; /* Элемент занимает всю ширину контейнера exhibit-list */
+    display: flex; /* Делаем flex для содержимого */
+    flex-direction: row; /* По умолчанию: фото слева, текст справа */
+    max-height: 220px; /* Фиксированная высота для всех элементов списка */
+}
+
+/* Обратный порядок для каждого второго элемента для шахматного порядка */
+.exhibit-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.exhibit-item:hover {
+    box-shadow: var(--shadow-dark);
+    transform: translateY(-5px);
+}
+
+.exhibit-item img {
+    width: 40%; /* Фото занимает 40% ширины */
+    min-width: 250px;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.exhibit-info {
+    width: 60%; /* Текст занимает 60% ширины */
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрируем текст по вертикали */
+}
+
+.exhibit-info h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--bg-primary);
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.4em;
+    text-align: left; /* Заголовок выравниваем по левому краю в info блоке */
+}
+
+.exhibit-info p {
+    font-size: 0.95em;
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-top: 0;
+    text-align: left; 
+    margin-left: 0; 
+    margin-right: 0;
+    max-width: 100%;
+}
+
+/* --- КОНЕЦ СТИЛЕЙ ЭКСПОНАТОВ --- */
+
 
 /* -------------------------------------- */
 /* --- D. SCROLL-REVEAL ANIMATION SETUP --- */
@@ -353,6 +430,10 @@ header .logo {
 .section-content.show .gallery img:nth-child(4) { transition-delay: 0.8s; }
 .section-content.show .map-container { transition-delay: 0.5s; }
 .section-content.show .button-container .btn { transition-delay: 0.9s; }
+/* Задержки для экспонатов на странице museum_map.html */
+.section-content.show .exhibit-item:nth-child(1) { transition-delay: 0.5s; }
+.section-content.show .exhibit-item:nth-child(2) { transition-delay: 0.7s; }
+.section-content.show .exhibit-item:nth-child(3) { transition-delay: 0.9s; }
 
 
 /* -------------------------------------- */
@@ -588,5 +669,29 @@ header .logo {
         font-size: 1.5rem;
         padding: 10px 15px;
         bottom: 50px; /* Корректировка высоты подписи для мобильных */
+    }
+
+    /* АДАПТАЦИЯ ЭКСПОНАТОВ (для мобильных: фото сверху, текст снизу) */
+    .exhibit-list {
+        gap: 30px;
+    }
+    .exhibit-item {
+        flex-direction: column !important; /* Принудительно меняем на вертикальный стек */
+        max-height: none;
+    }
+    .exhibit-item img {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+    }
+    .exhibit-info {
+        width: 100%;
+        padding: 15px;
+    }
+    .exhibit-info h3 {
+        text-align: center;
+    }
+    .exhibit-info p {
+        text-align: left;
     }
 }
