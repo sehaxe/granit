@@ -4,15 +4,15 @@
 
 /* Основные переменные цветов */
 :root {
-    --bg-primary: #00458E;      /* Тёмный синий гимназии */
+    --bg-primary: #003366;      /* Глубокий, богатый темно-синий */
     --bg-secondary: #FFFFFF;    /* Белый */
-    --accent: #F0A500;          /* Яркий акцент */
-    --text-color: #222222;      /* Тёмный текст */
-    --link-hover: #0088ff;      /* Светло-голубой для ховера */
-    --max-width: 1000px;        /* Ограничение ширины контента */
-    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --shadow-dark: 0 6px 15px rgba(0, 0, 0, 0.2);
-    /* Переменная --glow-effect удалена */
+    --accent: #FFB300;          /* Теплый золотистый акцент */
+    --text-color: #333333;      /* Темный, но мягкий текст */
+    --link-hover: #0088ff;
+    --max-width: 1200px;
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1); 
+    --shadow-dark: 0 10px 25px rgba(0, 0, 0, 0.2); 
+    --transition-speed: 0.4s;
 }
 
 /* Базовый reset */
@@ -26,14 +26,54 @@
 
 html, body {
     height: 100%;
-    /* Применяем шрифт Cantarell */
     font-family: 'Cantarell', sans-serif;
     color: var(--text-color);
     background: var(--bg-secondary);
-    line-height: 1.6;
+    line-height: 1.75; 
+    overflow-x: hidden;
 }
 
-/* --- HEADER / NAVIGATION --- */
+/* -------------------------------------- */
+/* --- A. PRELOADER ANIMATION --- */
+/* -------------------------------------- */
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary); 
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3); 
+    border-top-color: var(--accent); 
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+body.loaded #preloader {
+    opacity: 0;
+    visibility: hidden;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* -------------------------------------- */
+/* --- B. HEADER / MOBILE MENU --- */
+/* -------------------------------------- */
 
 header {
     position: fixed;
@@ -45,30 +85,32 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem 1.5rem;
+    padding: 0.8rem 1.5rem;
     z-index: 1000;
-    /* Убрано свечение */
     box-shadow: var(--shadow-dark);
+    opacity: 1; /* Показываем хедер сразу */
+    transition: opacity 0.3s ease;
 }
 
 header .logo {
     font-weight: 700;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin-right: 2rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 0;
 }
 
-header .nav a {
+.nav a {
     color: var(--bg-secondary);
     text-decoration: none;
     margin-left: 1.5rem;
     font-size: 1rem;
+    font-weight: 500;
     position: relative;
-    transition: color 0.3s ease;
+    transition: color var(--transition-speed) ease;
 }
 
-/* Красивое подчеркивание при наведении */
-header .nav a::after {
+/* Стиль подчеркивания */
+.nav a::after {
     content: '';
     position: absolute;
     bottom: -5px;
@@ -76,20 +118,37 @@ header .nav a::after {
     width: 0;
     height: 3px;
     background-color: var(--accent);
-    transition: width 0.3s ease-out;
+    transition: width var(--transition-speed) ease-out;
 }
 
-header .nav a:hover {
+.nav a:hover {
     color: var(--accent);
-    /* Убран text-shadow */
 }
 
-header .nav a:hover::after {
+.nav a:hover::after {
     width: 100%;
 }
 
+/* Стиль кнопки гамбургера (по умолчанию скрыта) */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--bg-secondary);
+    cursor: pointer;
+    margin-left: auto;
+    transition: color 0.3s ease;
+}
 
-/* --- SECTIONS / CONTENT --- */
+.hamburger:hover {
+    color: var(--accent);
+}
+
+
+/* -------------------------------------- */
+/* --- C. SECTIONS / CONTENT --- */
+/* -------------------------------------- */
 
 .section {
     padding: 100px 2rem 50px;
@@ -101,117 +160,189 @@ header .nav a:hover::after {
     margin: 0 auto;
 }
 
-/* Стиль для первой секции (главной) */
 #about {
     padding-top: 150px;
-    background-color: #f7f7f7;
+    background-color: #f7f7f7; 
+}
+
+/* Визуальное разделение секций */
+.section-divider {
+    width: 100%;
+    height: 1px; 
+    background: linear-gradient(to right, 
+        rgba(0, 0, 0, 0) 0%, 
+        var(--accent) 50%, 
+        rgba(0, 0, 0, 0) 100%
+    );
+    margin: 0 auto;
+    opacity: 0.5;
+    max-width: var(--max-width);
 }
 
 .section h1, .section h2 {
-    margin-bottom: 0.5rem;
-    font-size: 2.2rem;
+    margin-bottom: 1rem;
     color: var(--bg-primary);
     font-weight: 700;
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 5px;
-    /* Убран text-shadow */
-    
-    opacity: 0;
-    transform: translateX(-20px);
-    animation: slideIn 0.6s forwards;
-    animation-delay: 0.2s;
+}
+
+.section h1 {
+    font-size: 2.5rem;
+    position: relative;
+}
+
+/* Акцентная линия под H1 */
+.section h1::after {
+    content: '';
+    display: block;
+    width: 60px; 
+    height: 4px;
+    background-color: var(--accent);
+    margin: 10px auto 0;
+    border-radius: 2px;
 }
 
 .section h2 {
-    font-size: 1.8rem;
+    font-size: 2.1rem;
     border-bottom: 2px solid var(--accent);
+    padding-bottom: 5px;
+    display: inline-block;
 }
 
 .section p, .section ul {
     margin-top: 1.5rem;
-    max-width: var(--max-width);
+    max-width: 800px;
     line-height: 1.7;
     text-align: left;
     width: 100%;
     font-size: 1.05rem;
-    
-    opacity: 0;
-    animation: fadeIn 1s forwards;
-    animation-delay: 0.5s;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+/* Кастомные маркеры списка */
 .section ul {
-    padding-left: 20px;
+    padding-left: 0;
     list-style: none;
 }
 
 .section ul li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.7rem;
     position: relative;
     padding-left: 20px;
+    transition: transform 0.2s ease;
+}
+
+.section ul li:hover {
+    transform: translateX(5px);
 }
 
 .section ul li::before {
-    content: '•';
+    content: '■'; 
     color: var(--accent);
     font-weight: bold;
     display: inline-block;
     width: 1em;
     margin-left: -1em;
-    /* Убран text-shadow */
+    font-size: 0.8em; 
+    line-height: 1.5;
 }
 
-hr {
-    border: none;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: var(--max-width);
-    margin: 40px auto;
+/* Карта в контактах */
+.map-container {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 2rem;
 }
-
+.map-container iframe {
+    display: block;
+}
 
 /* --- GALLERY / IMAGES --- */
 
 .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
-    margin: 2rem 0;
+    margin: 3rem auto;
     max-width: var(--max-width);
+    width: 90%; 
 }
 
 .gallery img {
-    /* Настройки для крупного размера (одна картинка в ряд на широких экранах) */
-    max-width: 90%; 
-    height: auto;
+    width: 100%; 
+    height: 250px; 
     object-fit: cover;
     border-radius: 12px;
     box-shadow: var(--shadow-light);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* ИЗМЕНЕНИЕ: Ускорен переход до 0.25s */
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; 
     cursor: pointer;
-    
-    /* Убраны border и свечение */
-    border: 3px solid transparent;
-    
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.8s forwards;
+    border: 3px solid transparent; 
+    display: block;
 }
 
 .gallery img:hover {
-    transform: translateY(-5px) scale(1.02);
-    /* Убрано свечение */
+    transform: scale(1.03); 
     box-shadow: var(--shadow-dark); 
-    border-color: var(--accent); /* Оставлена рамка акцентного цвета при наведении */
+    border-color: var(--accent); 
 }
 
-/* Анимация появления каждой картинки */
-.gallery img:nth-child(1) { animation-delay: 0.1s; }
-.gallery img:nth-child(2) { animation-delay: 0.2s; }
-.gallery img:nth-child(3) { animation-delay: 0.3s; }
-.gallery img:nth-child(4) { animation-delay: 0.4s; }
-.gallery img:nth-child(5) { animation-delay: 0.5s; }
+/* -------------------------------------- */
+/* --- D. SCROLL-REVEAL ANIMATION SETUP --- */
+/* -------------------------------------- */
+
+/* Изначальное состояние скрытых элементов */
+.section-content * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease-out, transform 0.8s ease-out;
+}
+
+/* Состояние, когда элемент виден */
+.section-content.show * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Применение задержек к элементам внутри контейнера .show */
+.section-content.show h2 { transition-delay: 0.1s; } 
+.section-content.show p { transition-delay: 0.2s; }
+.section-content.show ul { transition-delay: 0.3s; }
+.section-content.show li { transition-delay: 0.4s; }
+.section-content.show .gallery img:nth-child(1) { transition-delay: 0.5s; }
+.section-content.show .gallery img:nth-child(2) { transition-delay: 0.6s; }
+.section-content.show .gallery img:nth-child(3) { transition-delay: 0.7s; }
+.section-content.show .gallery img:nth-child(4) { transition-delay: 0.8s; }
+.section-content.show .map-container { transition-delay: 0.5s; }
+
+
+/* -------------------------------------- */
+/* --- E. SCROLL-TO-TOP BUTTON --- */
+/* -------------------------------------- */
+
+#scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--accent);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-dark);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    z-index: 900;
+}
+
+#scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
 
 
 /* --- FOOTER --- */
@@ -223,55 +354,72 @@ hr {
     padding: 1.5rem;
     margin-top: 0;
     font-size: 0.9rem;
-    /* Убрано свечение */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Стандартная тень, если нужно */
+    box-shadow: 0 -5px 10px rgba(0,0,0,0.1);
 }
 
 
-/* --- ANIMATIONS --- */
+/* -------------------------------------- */
+/* --- F. MEDIA QUERIES (RESPONSIVE) --- */
+/* -------------------------------------- */
 
-@keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-    to { opacity: 1; }
-}
-
-@keyframes slideIn {
-    to { opacity: 1; transform: translateX(0); }
-}
-
-
-/* --- RESPONSIVE / Адаптивность --- */
-
-@media (max-width: 900px) {
-    .gallery img {
-        max-width: 95%;
-    }
-}
-
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+    /* Мобильное меню */
     header {
-        flex-direction: column;
-        padding: 0.5rem 1rem;
+        justify-content: space-between;
+        padding: 0.8rem 1rem;
     }
+    
     header .logo {
+        margin-right: 0;
+    }
+
+    .hamburger {
+        display: block; /* Показать гамбургер */
+    }
+
+    .nav {
+        display: none; 
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        width: 100%;
+        background: var(--bg-primary);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        flex-direction: column;
+        padding: 1rem 0;
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
+    }
+
+    .nav.active {
+        display: flex;
+        opacity: 1;
+    }
+    
+    .nav a {
         margin: 0.5rem 0;
+        padding: 0.5rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    header .nav a {
-        margin: 0 0.5rem;
+    .nav a:last-child {
+        border-bottom: none;
     }
+    
+    /* Убираем подчеркивание для мобильного меню */
+    .nav a::after {
+        display: none;
+    }
+    
     .section {
-        padding: 100px 1rem 30px;
+        padding: 80px 1rem 30px;
     }
-    .gallery img {
-        max-width: 100%;
+    
+    .gallery {
+        grid-template-columns: 1fr; 
     }
-    .section h1 {
-        font-size: 1.8rem;
-    }
-    .section h2 {
-        font-size: 1.5rem;
+    
+    #about {
+        padding-top: 100px; 
     }
 }
