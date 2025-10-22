@@ -6,7 +6,63 @@ document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.querySelector('.hamburger');
     const nav = document.querySelector('.nav');
     const scrollToTopBtn = document.getElementById('scroll-to-top');
+    
+    // Элементы слайдера
+    const slides = document.querySelectorAll('#hero-slider .slide');
+    const dotsContainer = document.querySelector('.slider-dots-container');
+    let slideIndex = 0;
+    let slideTimer;
+    
+    // =========================================================
+    // 0. ФУНКЦИИ СЛАЙДЕРА
+    // =========================================================
+    
+    function showSlides(n) {
+        // Останавливаем таймер перед сменой слайда
+        clearInterval(slideTimer); 
+        
+        // Пересчитываем индекс для цикличного показа
+        if (n >= slides.length) {slideIndex = 0}    
+        if (n < 0) {slideIndex = slides.length - 1}
+        
+        // Скрываем все слайды и деактивируем все точки
+        slides.forEach(slide => slide.classList.remove('active'));
+        document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+        
+        // Показываем текущий слайд и активируем текущую точку
+        slides[slideIndex].classList.add('active');
+        document.querySelectorAll('.dot')[slideIndex].classList.add('active');
+        
+        // Запускаем таймер снова
+        slideTimer = setInterval(() => {
+            slideIndex++;
+            showSlides(slideIndex);
+        }, 5000); // Смена каждые 5 секунд
+    }
+    
+    function currentSlide(n) {
+        slideIndex = n;
+        showSlides(slideIndex);
+    }
+    
+    // Создание точек навигации
+    function createDots() {
+        if (!dotsContainer) return;
+        slides.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            dot.addEventListener('click', () => currentSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+        
+        // Инициализация первого слайда после создания точек
+        if (slides.length > 0) {
+            showSlides(slideIndex);
+        }
+    }
 
+    createDots(); // Запускаем создание слайдера
+    
     // =========================================================
     // 1. ПЛАВНЫЙ СКРОЛЛ И ЗАКРЫТИЕ МОБИЛЬНОГО МЕНЮ
     // =========================================================
@@ -24,10 +80,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetId = this.getAttribute('href');
             const target = document.querySelector(targetId);
             
-            closeMobileMenu(); // Закрыть меню после клика
+            closeMobileMenu(); 
 
             if (target) {
-                // Используем небольшую задержку, чтобы гарантировать, что хедер виден
+                // Учитываем высоту хедера при прокрутке
                 setTimeout(() => {
                     const headerHeight = header ? header.offsetHeight : 0;
                     const targetPosition = target.offsetTop - headerHeight;
@@ -48,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (hamburger && nav) {
         hamburger.addEventListener('click', function() {
             nav.classList.toggle('active');
-            // Меняем иконку гамбургера на крестик и обратно
             if (nav.classList.contains('active')) {
                 this.querySelector('i').classList.replace('fa-bars', 'fa-times');
             } else {
@@ -63,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // =========================================================
 
     if (scrollToTopBtn) {
-        // Показать/скрыть кнопку
         window.addEventListener('scroll', function() {
             if (window.scrollY > 300) {
                 scrollToTopBtn.classList.add('visible');
@@ -72,7 +126,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Функция прокрутки
         scrollToTopBtn.addEventListener('click', function() {
             window.scrollTo({
                 top: 0,
@@ -103,10 +156,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const revealTargets = document.querySelectorAll('.section-content');
 
     revealTargets.forEach(target => {
-        // Добавляем начальный класс для первой секции, чтобы она появилась сразу
-        if (target.id === 'about') {
-            target.classList.add('show');
-        } else {
+        // Пропускаем первую секцию (about), так как она уже имеет класс 'show' в HTML
+        if (target.id !== 'about') {
             observer.observe(target);
         }
     });
@@ -126,6 +177,6 @@ window.addEventListener('load', function() {
         
         setTimeout(() => {
             preloader.remove();
-        }, 600); 
+        }, 600); // Задержка для плавной анимации исчезновения
     }
 });
