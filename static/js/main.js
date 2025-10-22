@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     createDots(); // Запускаем создание слайдера
     
     // =========================================================
-    // 1. ПЛАВНЫЙ СКРОЛЛ И ЗАКРЫТИЕ МОБИЛЬНОГО МЕНЮ
+    // 1. ФИКС: РАБОТА ЯКОРНЫХ ССЫЛОК И ЗАКРЫТИЕ МОБИЛЬНОГО МЕНЮ
     // =========================================================
     
     function closeMobileMenu() {
@@ -75,25 +75,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     navLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const target = document.querySelector(targetId);
+        link.addEventListener('click', function () {
+            // !!! ГЛАВНЫЙ ФИКС: Удаляем e.preventDefault() и ручную прокрутку.
+            // Браузер сам выполнит переход по href="#id".
             
+            // Просто закрываем меню.
             closeMobileMenu(); 
-
-            if (target) {
-                // Учитываем высоту хедера при прокрутке
-                setTimeout(() => {
-                    const headerHeight = header ? header.offsetHeight : 0;
-                    const targetPosition = target.offsetTop - headerHeight;
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }, 100); 
-            }
         });
     });
 
