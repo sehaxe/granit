@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
+    <link rel="icon" href="{{ url_for('favicon') }}" type="image/x-icon">
+    <link rel="icon" sizes="16x16" href="{{ url_for('favicon_16') }}" type="image/png">
+    <link rel="icon" sizes="32x32" href="{{ url_for('favicon_32') }}" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('apple_touch_icon') }}" type="image/png">
+    <link rel="icon" sizes="192x192" href="{{ url_for('android_chrome_192') }}" type="image/png">
+    <link rel="icon" sizes="512x512" href="{{ url_for('android_chrome_512') }}" type="image/png">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
+    
     <style>
         html { scroll-behavior: smooth; } 
     </style>
