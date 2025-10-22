@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         slideTimer = setInterval(() => {
             slideIndex++;
             showSlides(slideIndex);
-        }, 5000); // Смена каждые 5 секунд
+        }, 7000); // Смена каждые 5 секунд
     }
     
     function currentSlide(n) {

@@ -387,7 +387,6 @@ header .logo {
 
 /* Отдельный слайд */
 .slide {
-    display: none; /* Скрываем все слайды по умолчанию */
     position: absolute;
     top: 0;
     left: 0;
@@ -395,14 +394,33 @@ header .logo {
     height: 100%;
     background-size: cover;
     background-position: center;
-    /* Затемнение для лучшей читаемости текста */
     background-color: rgba(0, 0, 0, 0.3);
     background-blend-mode: darken;
+    
+    opacity: 0; 
+    visibility: hidden;
+    
+    /* УВЕЛИЧЕНО ВРЕМЯ ПЕРЕХОДА: 1.5 секунды для очень плавной смены */
+    transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out; 
 }
 
 /* Активный (видимый) слайд */
 .slide.active {
-    display: block; 
+    opacity: 1; 
+    visibility: visible;
+}
+
+/* Подпись/заголовок на слайде (также увеличено время перехода) */
+.slide-caption {
+    /* ... остальные стили ... */
+    
+    opacity: 0;
+    /* УВЕЛИЧЕНО ВРЕМЯ ПЕРЕХОДА для подписи: 1.5s с небольшой задержкой */
+    transition: opacity 1.5s ease-in-out 0.3s; 
+}
+
+.slide.active .slide-caption {
+    opacity: 1;
 }
 
 /* Анимация перехода между слайдами (плавное появление) */
