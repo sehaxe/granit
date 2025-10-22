@@ -27,7 +27,10 @@
     </div>
 
     <header class="header">
-        <div class="logo">Гимназия №6 г. Минска</div>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo_gymn.png') }}" alt="Логотип Гимназии №6" class="gymnasium-logo" style="height: 50px; margin-right: 15px;"> 
+            Гимназия №6 г. Минска
+        </div>
         <button class="hamburger" aria-label="Открыть меню">
             <i class="fas fa-bars"></i>
         </button>
@@ -106,6 +109,12 @@
     <section id="vpk" class="section vpk">
         <div class="section-content">
             <h2>Военно-патриотический клуб «Гранит»</h2>
+            
+            <div class="vpk-gallery" style="display: flex; flex-wrap: wrap; justify-content: space-around; gap: 15px; margin-bottom: 25px;">
+                <img src="{{ url_for('static', filename='vpk_logo.jpg') }}" alt="Логотип ВПК «Гранит»" style="max-width: 250px; height: auto;">
+                <img src="{{ url_for('static', filename='slide1.png') }}" alt="Фотография отряда «Гранит» 1" style="max-width: 30%; height: auto; object-fit: cover;">
+                <img src="{{ url_for('static', filename='slide2.png') }}" alt="Фотография отряда «Гранит» 2" style="max-width: 30%; height: auto; object-fit: cover;">
+            </div>
             <p>
                 <strong>ВПК «Гранит»</strong> был создан на базе Гимназии №6 г. Минска с целью <strong>военно-патриотического воспитания</strong> молодежи. Клуб имеет собственные <strong>отличительные символы и атрибуты</strong> (наименование, девиз, эмблема, форма).
             </p>
