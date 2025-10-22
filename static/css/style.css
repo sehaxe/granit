@@ -26,8 +26,8 @@
 
 html, body {
     height: 100%;
-    /* Применяем шрифт Cantarell */
-    font-family: 'Roboto', sans-serif;
+    /* Использование Merriweather для основного текста */
+    font-family: 'Merriweather', serif; 
     color: var(--text-color);
     background: var(--bg-secondary);
     line-height: 1.75; 
