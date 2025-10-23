@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Гимназия №6 г. Минска</title>
 
-    <!-- Оптимизация: Предварительно загружаем наши локальные шрифты (Variable Fonts). -->
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Montserrat-VariableFont_wght.ttf') }}" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Merriweather-VariableFont_opsz,wdth,wght.ttf') }}" as="font" type="font/ttf" crossorigin>
-    
+    <!-- Оптимизация: Предварительно загружаем наши локальные WOFF2 шрифты. -->
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Montserrat-Black.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Merriweather-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+        
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Гимназия №6 г. Минска">
     <meta property="og:description" content="Официальный сайт ГУО «Гимназия №6 г. Минска». Узнайте о нашем военно-патриотическом клубе «Гранит», музее «Вооруженные Силы РБ» и образовательных программах.">

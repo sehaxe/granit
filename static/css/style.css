@@ -1,45 +1,58 @@
 /* --- СКАЧАННЫЕ ЛОКАЛЬНЫЕ ШРИФТЫ (@font-face) --- */
 
-/* Montserrat (Variable Font) */
+/* 1. Montserrat Bold (700) */
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
-  /* Указываем диапазон толщин, который поддерживает Variable Font */
-  font-weight: 100 900; 
+  font-weight: 700;
   font-display: swap; 
-  src: url('../fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  src: url('../fonts/Montserrat-Bold.woff2') format('woff2');
 }
 
-/* Montserrat Italic (Variable Font) */
+/* 2. Montserrat Black (900) */
 @font-face {
   font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 100 900;
+  font-style: normal;
+  font-weight: 900;
   font-display: swap;
-  src: url('../fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+  src: url('../fonts/Montserrat-Black.woff2') format('woff2');
 }
 
-/* Merriweather (Variable Font) */
+/* 3. Merriweather Regular (400) */
 @font-face {
   font-family: 'Merriweather';
   font-style: normal;
-  /* Указываем диапазон толщин */
-  font-weight: 300 900; 
+  font-weight: 400;
   font-display: swap;
-  src: url('../fonts/Merriweather-VariableFont_opsz,wdth,wght.ttf') format('truetype');
+  src: url('../fonts/Merriweather-Regular.woff2') format('woff2');
 }
 
-/* Merriweather Italic (Variable Font) */
+/* 4. Merriweather Bold (700) */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/Merriweather-Bold.woff2') format('woff2');
+}
+
+/* 5. Merriweather Italic (400) - Если используется */
 @font-face {
   font-family: 'Merriweather';
   font-style: italic;
-  font-weight: 300 900;
+  font-weight: 400;
   font-display: swap;
-  src: url('../fonts/Merriweather-Italic-VariableFont_opsz,wdth,wght.ttf') format('truetype');
+  src: url('../fonts/Merriweather-Italic.woff2') format('woff2');
 }
 
-/* ---------------------------------------------------- */
-/* (Остальной CSS-код, который вы предоставили, остается без изменений) */
+/* 6. Merriweather Bold Italic (700) - Если используется */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/Merriweather-BoldItalic.woff2') format('woff2');
+}
 
 /* *** НОВЫЕ СТИЛИ ДЛЯ ЗАМЕНЫ ИКОНОК *** */
 .hamburger span {
