@@ -34,6 +34,32 @@ html, body {
     overflow-x: hidden;
 }
 
+/* СТИЛИ, ПЕРЕНЕСЕННЫЕ ИЗ HTML <style> */
+html { scroll-behavior: smooth; }
+
+.section.about .logo-container { 
+    text-align: center;
+    margin-bottom: 20px;
+}
+.section.about .gymnasium-main-logo { 
+    max-width: 150px; 
+    height: auto; 
+}
+.section.vpk .logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.section.vpk .gymnasium-main-logo { 
+    max-width: 250px; 
+    height: auto; 
+}
+.section.museum .button-container { 
+    text-align: center; 
+    margin-top: 30px; 
+}
+/* КОНЕЦ ПЕРЕНЕСЕННЫХ СТИЛЕЙ */
+
+
 /* -------------------------------------- */
 /* --- A. PRELOADER ANIMATION --- */
 /* -------------------------------------- */

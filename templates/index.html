@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Гимназия №6 г. Минска</title>
 
+    <!-- Оптимизация: Начинаем соединение с CDN Font Awesome заранее. -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Оптимизация: Предварительно загружаем CSS Font Awesome (render-blocking). -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style">
+    
+    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Гимназия №6 г. Минска">
     <meta property="og:description" content="Официальный сайт ГУО «Гимназия №6 г. Минска». Узнайте о нашем военно-патриотическом клубе «Гранит», музее «Вооруженные Силы РБ» и образовательных программах.">
     <meta property="og:type" content="website">
@@ -15,6 +22,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
+    <!-- Favicons and Manifest -->
     <link rel="icon" href="{{ url_for('favicon') }}" type="image/x-icon">
     <link rel="icon" sizes="16x16" href="{{ url_for('favicon_16') }}" type="image/png">
     <link rel="icon" sizes="32x32" href="{{ url_for('favicon_32') }}" type="image/png">
@@ -24,7 +32,8 @@
     <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
     
     <style>
-        html { scroll-behavior: smooth; } 
+        /* Оставлено для немедленной установки smooth-scroll, но рекомендуется перенести в style.css */
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 <body>
@@ -53,9 +62,13 @@
         <i class="fas fa-arrow-up"></i>
     </button>
     
+    <!-- Изображения в слайдере являются 'Above the Fold' (критически важны для первого экрана), 
+         поэтому они остаются БЕЗ lazy loading. -->
     <section id="hero-slider" class="slider-section">
         <div class="slider-container">
-            <div class="slide fade" style="background-image: url('static/slide1.avif');">
+            <!-- Здесь фон устанавливается инлайном, потому что это не <img> тег, 
+                 и он критически важен для первого экрана. Оставляем как есть. -->
+            <div class="slide fade" style="background-image: url('static/slide1.avif');"> 
                 <div class="slide-caption">Добро пожаловать в Гимназию №6</div>
             </div>
             <div class="slide fade" style="background-image: url('static/slide2.avif');">
@@ -71,8 +84,8 @@
 
     <section id="about" class="section about">
         <div class="section-content show">
-            <div class="logo-container" style="text-align: center; margin-bottom: 20px;">
-                <img src="{{ url_for('static', filename='logo_gymn.avif') }}" alt="Логотип Гимназии №6" class="gymnasium-main-logo" style="max-width: 150px; height: auto;"> 
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='logo_gymn.avif') }}" alt="Логотип Гимназии №6" class="gymnasium-main-logo" loading="lazy"> 
             </div>
             
             <h1>Гимназия №6 г. Минска</h1>
@@ -81,9 +94,9 @@
             </p>
             <p>
                 Гимназия располагается в трех учебных корпусах в Советском районе столицы. Учреждение активно развивает систему <strong>идеологической и воспитательной работы</strong>. На базе гимназии существуют такие структуры, как <strong>отряд БРПО имени Зинаиды Портновой</strong>, <strong>военно-патриотический клуб «Гранит»</strong>,
-             <strong>первичная организация ОО БРСМ Гимназии № 6 г. Минска</strong>, </strong>первичная организация РОО "Белая Русь" ГУО "Гимназии N6"</strong>.</p>
+             <strong>первичная организация ОО БРСМ Гимназии № 6 г. Минска</strong>, <strong>первичная организация РОО "Белая Русь" ГУО "Гимназии N6"</strong>.</p>
             <p>
-                <strong>Руководителем по военно-патриотическому воспитанию</strong> в гимназии является полковник запаса Вооруженных Сил Республики Беларусь </strong>Халипов Сергей Сергеевич</strong>. Руководитель по военно-патриотическому воспитанию является руководителем ВПК «Гранит», отвестсвенным за военно-патриотическое воспитание молодежи, а также за функционирование музея.
+                <strong>Руководителем по военно-патриотическому воспитанию</strong> в гимназии является полковник запаса Вооруженных Сил Республики Беларусь <strong>Халипов Сергей Сергеевич</strong>. Руководитель по военно-патриотическому воспитанию является руководителем ВПК «Гранит», ответственным за военно-патриотическое воспитание молодежи, а также за функционирование музея.
             </p>
         </div>
     </section>
@@ -97,16 +110,16 @@
                 Музей был открыт в гимназии №6 с целью сохранения памяти о героическом прошлом белорусского народа и воспитания патриотизма.
             </p>
             <div class="gallery">
-                <img src="static/museum1.avif" alt="Экспонат музея 1">
-                <img src="static/museum2.avif" alt="Экспонат музея 2">
-                <img src="static/museum3.avif" alt="Экспонат музея 3">
-                <img src="static/museum4.avif" alt="Экспонат музея 4">
+                <img src="static/museum1.avif" alt="Экспонат музея 1" loading="lazy">
+                <img src="static/museum2.avif" alt="Экспонат музея 2" loading="lazy">
+                <img src="static/museum3.avif" alt="Экспонат музея 3" loading="lazy">
+                <img src="static/museum4.avif" alt="Экспонат музея 4" loading="lazy">
             </div>
             <p>
                 В экспозиции представлены уникальные <strong>экспонаты</strong>, переданные сотрудниками, родителями учащихся, а также организациями-партнерами. Музей имеет несколько разделов, посвященных <strong>истории белорусской армии</strong>, начиная с 1918 года. Он служит важным центром <strong>музейной педагогики</strong> для формирования у ребят национального стержня, готовности защищать Родину и беречь мир.
             </p>
             
-            <div class="button-container" style="text-align: center; margin-top: 30px;">
+            <div class="button-container">
                 <a href="/museum-map" class="btn primary-btn">
                     Интерактивная карта музея <i class="fas fa-map-marked-alt"></i>
                 </a>
@@ -118,17 +131,17 @@
 
     <section id="vpk" class="section vpk">
         <div class="section-content">
-            <div class="logo-container" style="text-align: center; margin-bottom: 20px;">
-                <img src="{{ url_for('static', filename='vpk_logo.avif') }}" alt="Логотип ВПК «Гранит»" class="gymnasium-main-logo" style="max-width: 250px; height: auto;"> 
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='vpk_logo.avif') }}" alt="Логотип ВПК «Гранит»" class="gymnasium-main-logo" loading="lazy"> 
             </div>
             <h2>Военно-патриотический клуб «Гранит»</h2>
         </div>
 
             <div class="gallery"> 
-                <img src="{{ url_for('static', filename='granit1.avif') }}" alt="Фотография отряда «Гранит» 1">
-                <img src="{{ url_for('static', filename='granit2.avif') }}" alt="Фотография отряда «Гранит» 2">
-                <img src="{{ url_for('static', filename='granit3.avif') }}" alt="Фотография отряда «Гранит» 3">
-                <img src="{{ url_for('static', filename='granit4.avif') }}" alt="Фотография отряда «Гранит» 4">
+                <img src="{{ url_for('static', filename='granit1.avif') }}" alt="Фотография отряда «Гранит» 1" loading="lazy">
+                <img src="{{ url_for('static', filename='granit2.avif') }}" alt="Фотография отряда «Гранит» 2" loading="lazy">
+                <img src="{{ url_for('static', filename='granit3.avif') }}" alt="Фотография отряда «Гранит» 3" loading="lazy">
+                <img src="{{ url_for('static', filename='granit4.avif') }}" alt="Фотография отряда «Гранит» 4" loading="lazy">
             </div>
             
             <p>
@@ -171,9 +184,10 @@
             <p>
                 <strong>Контактные телефоны:</strong>
                 <ul>
-                    <li>Приемная директора (К.1): +375 17 242-73-29</li>
-                    <li>Секретарь учебной части (К.1): +375 17 242-30-61</li>
-                    <li>Вахта (К.3): +375 17 292-87-91</li>
+                    <!-- Оптимизация: Используем протокол tel: для прямого вызова с мобильных. -->
+                    <li>Приемная директора (К.1): <a href="tel:+375172427329">+375 17 242-73-29</a></li>
+                    <li>Секретарь учебной части (К.1): <a href="tel:+375172423061">+375 17 242-30-61</a></li>
+                    <li>Вахта (К.3): <a href="tel:+375172928791">+375 17 292-87-91</a></li>
                 </ul>
             </p>
             <p>
@@ -186,6 +200,8 @@
         <p>&copy; 2025 Гимназия №6 г. Минска. Все права защищены.</p>
     </footer>
 
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <!-- Оптимизация: Атрибут 'defer' гарантирует, что HTML будет полностью обработан 
+         до выполнения скрипта, предотвращая блокировку рендеринга. -->
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 </body>
 </html>
