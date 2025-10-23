@@ -1,14 +1,32 @@
 from flask import Flask, render_template, send_from_directory
 import os
-# Импортируем Flask-Minify
 from flask_minify import minify 
 
 app = Flask(__name__)
+
+# --- 1. Настройка кэширования статических файлов ---
+# Устанавливаем кэширование статических файлов (CSS, JS, Fonts, Images) на 30 дней.
+# Это максимально ускоряет повторные загрузки.
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 60 * 60 * 24 * 30  # 30 дней
 
 # --- Инициализация Flask-Minify ---
 # HTML, CSS и JS будут автоматически минифицированы.
 minify(app=app)
 # ------------------------------------
+
+# --- 2. Добавление заголовков кэширования для HTML-страниц ---
+@app.after_request
+def add_cache_headers(response):
+    """
+    Добавляет заголовки Cache-Control для динамических HTML-страниц (text/html).
+    """
+    if response.content_type == u'text/html; charset=utf-8':
+        # Кэшируем HTML на 5 минут (300 секунд), разрешаем публичное кэширование.
+        # must-revalidate гарантирует, что браузер проверит наличие новой версии
+        # после истечения 5-минутного лимита.
+        response.headers['Cache-Control'] = 'public, max-age=300, must-revalidate'
+    
+    return response
 
 @app.route('/')
 def home():
@@ -21,7 +39,7 @@ def museum_map():
     # Шаблон museum_map.html также будет автоматически минифицирован.
     return render_template('museum_map.html')
 
-# Маршруты для иконок (без изменений)
+# Маршруты для иконок (без изменений, теперь кэшируются на 30 дней)
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
