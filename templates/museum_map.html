@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Интерактивная карта и 3D-тур | Музей</title>
 
-    <!-- Оптимизация: Предварительно загружаем наши локальные WOFF2 шрифты. -->
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Montserrat-Black.woff2') }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Merriweather-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <!-- Критически важный шрифт для заголовков -->
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Montserrat-Black.woff2') }}" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <!-- Критически важный шрифт для основного текста -->
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Merriweather-Regular.woff2') }}" as="font" type="font/woff2" crossorigin fetchpriority="high">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <!-- УДАЛЕНО: <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"> -->
 
     <meta property="og:title" content="Виртуальный 360° Тур по Музею Гимназии №6">
     <meta property="og:description" content="Исследуйте экспозицию музея «Вооруженные Силы Республики Беларусь» в полном 360-градусном формате. Смотрите ключевые экспонаты онлайн!">
@@ -70,24 +70,30 @@
              text-align: center;
              max-width: 800px;
         }
+        
+        /* Инлайновый стиль main убран сюда */
+        .map-main-section {
+            padding-top: 150px;
+        }
+        /* Инлайновый стиль кнопки убран сюда */
+        .back-to-museum-btn {
+            background-color: var(--accent) !important; 
+            color: var(--bg-primary) !important;
+        }
     </style>
 </head>
 <body>
     
     <div id="preloader">
-        <!-- УДАЛЕНО: loader-ring, loader-dot (т.к. они определены в index.html и могут сбивать с толку) 
-             Возвращаем стандартный лоадер из index.html, который использует spinner -->
         <div class="loader-spinner"></div>
     </div>
 
     <header class="header">
         <div class="logo">Гимназия №6 г. Минска</div>
         <button class="hamburger" aria-label="Открыть меню">
-            <!-- Замена: fa-bars на символ бургер-меню -->
             <span>&#9776;</span>
         </button>
         <nav class="nav">
-            <!-- Ссылки ведут на секции главной страницы (через /#) -->
             <a href="/#about">О гимназии</a>
             <a href="/#museum">Музей</a>
             <a href="/museum-map">Интерактивная карта</a>
@@ -96,7 +102,7 @@
         </nav>
     </header>
 
-    <main class="section" style="padding-top: 150px;">
+    <main class="section map-main-section">
         <div class="section-content show">
             <h1>Виртуальный 360° тур по музею</h1>
             
@@ -104,73 +110,73 @@
                 Исследуйте экспозицию музея «Вооруженные Силы Республики Беларусь» в формате 360-градусной панорамы. Используйте мышь или сенсорный экран для осмотра.
             </p>
             
-            <div class="map-iframe-container">
+            <div class="map-iframe-container" fetchpriority="high">
+                <!-- Панорама является основным контентом, ей даем высокий приоритет -->
                 <div id="panorama-viewer"></div>
             </div>
             
             <div class="button-container">
-                <a href="/#museum" class="btn primary-btn" style="background-color: var(--accent); color: var(--bg-primary);">
-                    <!-- Замена: fa-arrow-left на стрелку влево/назад -->
+                <a href="/#museum" class="btn primary-btn back-to-museum-btn">
                     <span class="back-arrow">&#10094;</span> Вернуться к информации о музее
                 </a>
             </div>
 
         </div>
+
+        <div class="section-divider"></div>
+
+        <section id="exhibits" class="section exhibits">
+            <div class="section-content show">
+                <h2>Ключевые экспонаты</h2>
+                <p>
+                    Ниже представлены некоторые из самых значимых и уникальных экспонатов, собранных в нашем музее, с подробными описаниями их истории и значения.
+                </p>
+
+                <div class="exhibit-list">
+                    
+                    <div class="exhibit-item">
+                        <!-- ДОБАВЛЕНО: width/height + loading="lazy" -->
+                        <img src="{{ url_for('static', filename='exhibit1.avif') }}" alt="Образец военной формы" width="300" height="220" loading="lazy">
+                        <div class="exhibit-info">
+                            <h3>Форма офицера БВО</h3>
+                            <p>
+                                Парадная форма старшего офицера Белорусского военного округа 1980-х годов. Представлена с полным комплектом наград, символизируя героический путь советских и белорусских военнослужащих.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="exhibit-item">
+                        <!-- ДОБАВЛЕНО: width/height + loading="lazy" -->
+                        <img src="{{ url_for('static', filename='exhibit2.avif') }}" alt="Исторические документы" width="300" height="220" loading="lazy">
+                        <div class="exhibit-info">
+                            <h3>Исторические документы</h3>
+                            <p>
+                                Оригинальные документы, включая приказы, письма и удостоверения личности участников Великой Отечественной войны, переданные в дар музею ветеранами Советского района.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="exhibit-item">
+                        <!-- ДОБАВЛЕНО: width/height + loading="lazy" -->
+                        <img src="{{ url_for('static', filename='exhibit3.avif') }}" alt="Макет военной техники" width="300" height="220" loading="lazy">
+                        <div class="exhibit-info">
+                            <h3>Макет танка Т-34</h3>
+                            <p>
+                                Подробный макет легендарного танка Т-34, символа победы в Великой Отечественной войне. Макет используется для наглядного изучения военной истории и техники.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    </div>
+            </div>
+        </section>
     </main>
-
-    <div class="section-divider"></div>
-
-    <section id="exhibits" class="section exhibits">
-        <div class="section-content show">
-            <h2>Ключевые экспонаты</h2>
-            <p>
-                Ниже представлены некоторые из самых значимых и уникальных экспонатов, собранных в нашем музее, с подробными описаниями их истории и значения.
-            </p>
-
-            <div class="exhibit-list">
-                
-                <div class="exhibit-item">
-                    <!-- ДОБАВЛЕНО: loading="lazy" -->
-                    <img src="{{ url_for('static', filename='exhibit1.avif') }}" alt="Образец военной формы" loading="lazy">
-                    <div class="exhibit-info">
-                        <h3>Форма офицера БВО</h3>
-                        <p>
-                            Парадная форма старшего офицера Белорусского военного округа 1980-х годов. Представлена с полным комплектом наград, символизируя героический путь советских и белорусских военнослужащих.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="exhibit-item">
-                    <!-- ДОБАВЛЕНО: loading="lazy" -->
-                    <img src="{{ url_for('static', filename='exhibit2.avif') }}" alt="Исторические документы" loading="lazy">
-                    <div class="exhibit-info">
-                        <h3>Исторические документы</h3>
-                        <p>
-                            Оригинальные документы, включая приказы, письма и удостоверения личности участников Великой Отечественной войны, переданные в дар музею ветеранами Советского района.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="exhibit-item">
-                    <!-- ДОБАВЛЕНО: loading="lazy" -->
-                    <img src="{{ url_for('static', filename='exhibit3.avif') }}" alt="Макет военной техники" loading="lazy">
-                    <div class="exhibit-info">
-                        <h3>Макет танка Т-34</h3>
-                        <p>
-                            Подробный макет легендарного танка Т-34, символа победы в Великой Отечественной войне. Макет используется для наглядного изучения военной истории и техники.
-                        </p>
-                    </div>
-                </div>
-                
-                </div>
-        </div>
-    </section>
+    
     <footer class="footer">
         <p>&copy; 2025 Гимназия №6 г. Минска. Все права защищены.</p>
     </footer>
 
     <!-- Скрипт Pannellum остается для работы 360-тура, т.к. он критичен для этой страницы -->
-    <!-- УДАЛЕНО: Дублирующаяся строка скрипта -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     
     <script>
@@ -211,7 +217,6 @@
             }
         };
     </script>
-    <!-- ДОБАВЛЕНО: defer -->
     <script src="{{ url_for('static', filename='js/main.js') }}" defer></script> 
 </body>
 </html>

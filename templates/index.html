@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Гимназия №6 г. Минска</title>
 
-    <!-- Оптимизация: Предварительно загружаем наши локальные WOFF2 шрифты. -->
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Montserrat-Black.woff2') }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Merriweather-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <!-- Критически важный шрифт для заголовков -->
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Montserrat-Black.woff2') }}" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <!-- Критически важный шрифт для основного текста -->
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Merriweather-Regular.woff2') }}" as="font" type="font/woff2" crossorigin fetchpriority="high">
         
+    <!-- Оптимизация: Предварительная загрузка основного CSS -->
+    <link rel="preload" href="{{ url_for('static', filename='css/style.css') }}" as="style">
+    
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Гимназия №6 г. Минска">
     <meta property="og:description" content="Официальный сайт ГУО «Гимназия №6 г. Минска». Узнайте о нашем военно-патриотическом клубе «Гранит», музее «Вооруженные Силы РБ» и образовательных программах.">
@@ -44,8 +48,7 @@
             Гимназия №6 г. Минска
         </div>
         <button class="hamburger" aria-label="Открыть меню">
-            <!-- Замена: fa-bars на символ бургер-меню -->
-            <span>&#9776;</span> 
+            <span>&#9776;</span>
         </button>
         <nav class="nav">
             <a href="#about">О гимназии</a>
@@ -57,14 +60,15 @@
     </header>
     
     <button id="scroll-to-top" aria-label="Прокрутить наверх">
-        <!-- Замена: fa-arrow-up на стрелку вверх -->
-        <span>&#9650;</span> 
+        <span>&#9650;</span>
     </button>
     
     <!-- Изображения в слайдере являются 'Above the Fold' (критически важны для первого экрана), 
-         поэтому они остаются БЕЗ lazy loading. -->
-    <section id="hero-slider" class="slider-section">
+         поэтому им дается fetchpriority="high". Ширина/высота заданы в CSS. -->
+    <section id="hero-slider" class="slider-section" fetchpriority="high">
         <div class="slider-container">
+            <!-- Здесь фон устанавливается инлайном, потому что это не <img> тег, 
+                 и он критически важен для первого экрана. Оставляем как есть. -->
             <div class="slide fade" style="background-image: url('static/slide1.avif');"> 
                 <div class="slide-caption">Добро пожаловать в Гимназию №6</div>
             </div>
@@ -79,119 +83,124 @@
             </div>
     </section>
 
-    <section id="about" class="section about">
-        <div class="section-content show">
-            <div class="logo-container">
-                <img src="{{ url_for('static', filename='logo_gymn.avif') }}" alt="Логотип Гимназии №6" class="gymnasium-main-logo" loading="lazy"> 
+    <main>
+        <section id="about" class="section about">
+            <div class="section-content show">
+                <div class="logo-container">
+                    <!-- ЗАМЕНИТЕ width/height на реальные размеры логотипа (Критично для CLS) -->
+                    <img src="{{ url_for('static', filename='logo_gymn.avif') }}" alt="Логотип Гимназии №6" class="gymnasium-main-logo" width="150" height="150" loading="lazy"> 
+                </div>
+                
+                <h1>Гимназия №6 г. Минска</h1>
+                <p>
+                    Государственное учреждение образования <strong>«Гимназия №6 г. Минска»</strong> — это современное учебное заведение с богатой историей, основанное на базе общеобразовательной школы №6 в 1991 году. Гимназия известна высоким уровнем образования, с 2024 года ее возглавляет директор <strong>Казак Наталья Болеславовна</strong>.
+                </p>
+                <p>
+                    Гимназия располагается в трех учебных корпусах в Советском районе столицы. Учреждение активно развивает систему <strong>идеологической и воспитательной работы</strong>. На базе гимназии существуют такие структуры, как <strong>отряд БРПО имени Зинаиды Портновой</strong>, <strong>военно-патриотический клуб «Гранит»</strong>,
+                 <strong>первичная организация ОО БРСМ Гимназии № 6 г. Минска</strong>, <strong>первичная организация РОО "Белая Русь" ГУО "Гимназии N6"</strong>.</p>
+                <p>
+                    <strong>Руководителем по военно-патриотическому воспитанию</strong> в гимназии является полковник запаса Вооруженных Сил Республики Беларусь <strong>Халипов Сергей Сергеевич</strong>. Руководитель по военно-патриотическому воспитанию является руководителем ВПК «Гранит», ответственным за военно-патриотическое воспитание молодежи, а также за функционирование музея.
+                </p>
             </div>
-            
-            <h1>Гимназия №6 г. Минска</h1>
-            <p>
-                Государственное учреждение образования <strong>«Гимназия №6 г. Минска»</strong> — это современное учебное заведение с богатой историей, основанное на базе общеобразовательной школы №6 в 1991 году. Гимназия известна высоким уровнем образования, с 2024 года ее возглавляет директор <strong>Казак Наталья Болеславовна</strong>.
-            </p>
-            <p>
-                Гимназия располагается в трех учебных корпусах в Советском районе столицы. Учреждение активно развивает систему <strong>идеологической и воспитательной работы</strong>. На базе гимназии существуют такие структуры, как <strong>отряд БРПО имени Зинаиды Портновой</strong>, <strong>военно-патриотический клуб «Гранит»</strong>,
-             <strong>первичная организация ОО БРСМ Гимназии № 6 г. Минска</strong>, <strong>первичная организация РОО "Белая Русь" ГУО "Гимназии N6"</strong>.</p>
-            <p>
-                <strong>Руководителем по военно-патриотическому воспитанию</strong> в гимназии является полковник запаса Вооруженных Сил Республики Беларусь <strong>Халипов Сергей Сергеевич</strong>. Руководитель по военно-патриотическому воспитанию является руководителем ВПК «Гранит», ответственным за военно-патриотическое воспитание молодежи, а также за функционирование музея.
-            </p>
-        </div>
-    </section>
+        </section>
 
-    <div class="section-divider"></div>
+        <div class="section-divider"></div>
 
-    <section id="museum" class="section museum">
-        <div class="section-content">
-            <h2>Музей «Вооруженные Силы Республики Беларусь»</h2>
-            <p>
-                Музей был открыт в гимназии №6 с целью сохранения памяти о героическом прошлом белорусского народа и воспитания патриотизма.
-            </p>
-            <div class="gallery">
-                <img src="static/museum1.avif" alt="Экспонат музея 1" loading="lazy">
-                <img src="static/museum2.avif" alt="Экспонат музея 2" loading="lazy">
-                <img src="static/museum3.avif" alt="Экспонат музея 3" loading="lazy">
-                <img src="static/museum4.avif" alt="Экспонат музея 4" loading="lazy">
+        <section id="museum" class="section museum">
+            <div class="section-content">
+                <h2>Музей «Вооруженные Силы Республики Беларусь»</h2>
+                <p>
+                    Музей был открыт в гимназии №6 с целью сохранения памяти о героическом прошлом белорусского народа и воспитания патриотизма.
+                </p>
+                <div class="gallery">
+                    <!-- ЗАМЕНИТЕ width/height на реальные размеры изображений -->
+                    <img src="static/museum1.avif" alt="Экспонат музея 1" width="300" height="250" loading="lazy">
+                    <img src="static/museum2.avif" alt="Экспонат музея 2" width="300" height="250" loading="lazy">
+                    <img src="static/museum3.avif" alt="Экспонат музея 3" width="300" height="250" loading="lazy">
+                    <img src="static/museum4.avif" alt="Экспонат музея 4" width="300" height="250" loading="lazy">
+                </div>
+                <p>
+                    В экспозиции представлены уникальные <strong>экспонаты</strong>, переданные сотрудниками, родителями учащихся, а также организациями-партнерами. Музей имеет несколько разделов, посвященных <strong>истории белорусской армии</strong>, начиная с 1918 года. Он служит важным центром <strong>музейной педагогики</strong> для формирования у ребят национального стержня, готовности защищать Родину и беречь мир.
+                </p>
+                
+                <div class="button-container">
+                    <a href="/museum-map" class="btn primary-btn">
+                        Интерактивная карта музея <span class="map-icon">&#10148;</span>
+                    </a>
+                </div>
             </div>
-            <p>
-                В экспозиции представлены уникальные <strong>экспонаты</strong>, переданные сотрудниками, родителями учащихся, а также организациями-партнерами. Музей имеет несколько разделов, посвященных <strong>истории белорусской армии</strong>, начиная с 1918 года. Он служит важным центром <strong>музейной педагогики</strong> для формирования у ребят национального стержня, готовности защищать Родину и беречь мир.
-            </p>
-            
-            <div class="button-container">
-                <a href="/museum-map" class="btn primary-btn">
-                    Интерактивная карта музея <span class="map-icon">&#10148;</span>
-                </a>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section id="vpk" class="section vpk">
+            <div class="section-content">
+                <div class="logo-container">
+                    <!-- ЗАМЕНИТЕ width/height на реальные размеры логотипа -->
+                    <img src="{{ url_for('static', filename='vpk_logo.avif') }}" alt="Логотип ВПК «Гранит»" class="gymnasium-main-logo" width="250" height="150" loading="lazy"> 
+                </div>
+                <h2>Военно-патриотический клуб «Гранит»</h2>
             </div>
-        </div>
-    </section>
 
-    <div class="section-divider"></div>
-
-    <section id="vpk" class="section vpk">
-        <div class="section-content">
-            <div class="logo-container">
-                <img src="{{ url_for('static', filename='vpk_logo.avif') }}" alt="Логотип ВПК «Гранит»" class="gymnasium-main-logo" loading="lazy"> 
+                <div class="gallery"> 
+                    <!-- ЗАМЕНИТЕ width/height на реальные размеры изображений -->
+                    <img src="{{ url_for('static', filename='granit1.avif') }}" alt="Фотография отряда «Гранит» 1" width="300" height="250" loading="lazy">
+                    <img src="{{ url_for('static', filename='granit2.avif') }}" alt="Фотография отряда «Гранит» 2" width="300" height="250" loading="lazy">
+                    <img src="{{ url_for('static', filename='granit3.avif') }}" alt="Фотография отряда «Гранит» 3" width="300" height="250" loading="lazy">
+                    <img src="{{ url_for('static', filename='granit4.avif') }}" alt="Фотография отряда «Гранит» 4" width="300" height="250" loading="lazy">
+                </div>
+                
+                <p>
+                    <strong>ВПК «Гранит»</strong> был создан на базе Гимназии №6 г. Минска с целью <strong>военно-патриотического воспитания</strong> молодежи. Клуб имеет собственные <strong>отличительные символы и атрибуты</strong> (наименование, девиз, эмблема, форма).
+                </p>
+                <p>
+                    Основные <strong>цели</strong> клуба:
+                    <ul>
+                        <li>изучение истории Республики Беларусь и всестороннее знакомство с военно-патриотическими традициями белорусской армии;</li>
+                        <li>подготовка учащихся к службе в Вооруженных Силах Республики Беларусь;</li>
+                        <li>организация летних лагерей военно-патриотической и туристско-краеведческой направленности;</li>
+                        <li>проведение поездок и туристических походов по историческим местам Республики Беларусь;</li>
+                        <li>организация и проведение военно-спортивных игр, соревнований, конкурсов;</li>
+                        <li>информационно-издательская деятельность в области развития гражданственности и патриотизма молодежи;</li>
+                        <li>оказание шефской помощи ветеранам Великой Отечественной войны, труда и правоохранительных органов; семьям военнослужащих, погибших при исполнении воинского долга.</li>
+                    </ul>
+                </p>
+                <p>
+                    Руководителем клуба является <strong>руководитель по военно-патриотическому воспитанию - Сергей Сергеевич Халипов</strong>. Деятельность ВПК «Гранит» направлена на формирование гражданственности и патриотизма через практические занятия и изучение истории.
+                </p>
             </div>
-            <h2>Военно-патриотический клуб «Гранит»</h2>
-        </div>
+        </section>
 
-            <div class="gallery"> 
-                <img src="{{ url_for('static', filename='granit1.avif') }}" alt="Фотография отряда «Гранит» 1" loading="lazy">
-                <img src="{{ url_for('static', filename='granit2.avif') }}" alt="Фотография отряда «Гранит» 2" loading="lazy">
-                <img src="{{ url_for('static', filename='granit3.avif') }}" alt="Фотография отряда «Гранит» 3" loading="lazy">
-                <img src="{{ url_for('static', filename='granit4.avif') }}" alt="Фотография отряда «Гранит» 4" loading="lazy">
+        <div class="section-divider"></div>
+
+        <section id="contacts" class="section contacts">
+            <div class="section-content">
+                <h2>Контакты и Адреса</h2>
+                <p>
+                    <strong>ГУО «Гимназия №6 г. Минска»</strong> расположена в трех учебных корпусах:
+                    <ul>
+                        <li><strong>Корпус №1:</strong> г. Минск, <strong>ул. Восточная, 40</strong>.</li>
+                        <li><strong>Корпус №2:</strong> г. Минск, <strong>ул. Некрасова, 24</strong>.</li>
+                        <li><strong>Корпус №3:</strong> г. Минск, <strong>ул. Некрасова, 24/1</strong>.</li>
+                    </ul>
+                </p>
+                <p>
+                    <strong>Основной адрес (К.1):</strong> 220113, Республика Беларусь, г. Минск, ул. Восточная, 40.
+                </p>
+                <p>
+                    <strong>Контактные телефоны:</strong>
+                    <ul>
+                        <li>Приемная директора (К.1): <a href="tel:+375172427329">+375 17 242-73-29</a></li>
+                        <li>Секретарь учебной части (К.1): <a href="tel:+375172423061">+375 17 242-30-61</a></li>
+                        <li>Вахта (К.3): <a href="tel:+375172928791">+375 17 292-87-91</a></li>
+                    </ul>
+                </p>
+                <p>
+                    <strong>Официальный сайт:</strong> <a href="http://gymn6.minsk.edu.by/" target="_blank">http://gymn6.minsk.edu.by/</a>
+                </p>
             </div>
-            
-            <p>
-                <strong>ВПК «Гранит»</strong> был создан на базе Гимназии №6 г. Минска с целью <strong>военно-патриотического воспитания</strong> молодежи. Клуб имеет собственные <strong>отличительные символы и атрибуты</strong> (наименование, девиз, эмблема, форма).
-            </p>
-            <p>
-                Основные <strong>цели</strong> клуба:
-                <ul>
-                    <li>изучение истории Республики Беларусь и всестороннее знакомство с военно-патриотическими традициями белорусской армии;</li>
-                    <li>подготовка учащихся к службе в Вооруженных Силах Республики Беларусь;</li>
-                    <li>организация летних лагерей военно-патриотической и туристско-краеведческой направленности;</li>
-                    <li>проведение поездок и туристических походов по историческим местам Республики Беларусь;</li>
-                    <li>организация и проведение военно-спортивных игр, соревнований, конкурсов;</li>
-                    <li>информационно-издательская деятельность в области развития гражданственности и патриотизма молодежи;</li>
-                    <li>оказание шефской помощи ветеранам Великой Отечественной войны, труда и правоохранительных органов; семьям военнослужащих, погибших при исполнении воинского долга.</li>
-                </ul>
-            </p>
-            <p>
-                Руководителем клуба является <strong>руководитель по военно-патриотическому воспитанию - Сергей Сергеевич Халипов</strong>. Деятельность ВПК «Гранит» направлена на формирование гражданственности и патриотизма через практические занятия и изучение истории.
-            </p>
-        </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <section id="contacts" class="section contacts">
-        <div class="section-content">
-            <h2>Контакты и Адреса</h2>
-            <p>
-                <strong>ГУО «Гимназия №6 г. Минска»</strong> расположена в трех учебных корпусах:
-                <ul>
-                    <li><strong>Корпус №1:</strong> г. Минск, <strong>ул. Восточная, 40</strong>.</li>
-                    <li><strong>Корпус №2:</strong> г. Минск, <strong>ул. Некрасова, 24</strong>.</li>
-                    <li><strong>Корпус №3:</strong> г. Минск, <strong>ул. Некрасова, 24/1</strong>.</li>
-                </ul>
-            </p>
-            <p>
-                <strong>Основной адрес (К.1):</strong> 220113, Республика Беларусь, г. Минск, ул. Восточная, 40.
-            </p>
-            <p>
-                <strong>Контактные телефоны:</strong>
-                <ul>
-                    <!-- Оптимизация: Используем протокол tel: для прямого вызова с мобильных. -->
-                    <li>Приемная директора (К.1): <a href="tel:+375172427329">+375 17 242-73-29</a></li>
-                    <li>Секретарь учебной части (К.1): <a href="tel:+375172423061">+375 17 242-30-61</a></li>
-                    <li>Вахта (К.3): <a href="tel:+375172928791">+375 17 292-87-91</a></li>
-                </ul>
-            </p>
-            <p>
-                <strong>Официальный сайт:</strong> <a href="http://gymn6.minsk.edu.by/" target="_blank">http://gymn6.minsk.edu.by/</a>
-            </p>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer class="footer">
         <p>&copy; 2025 Гимназия №6 г. Минска. Все права защищены.</p>
