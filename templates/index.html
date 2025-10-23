@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Гимназия №6 г. Минска</title>
 
+    <meta name="description" content="Официальный сайт ГУО «Гимназия №6 г. Минска». Узнайте о нашем военно-патриотическом клубе «Гранит», музее «Вооруженные Силы РБ» и образовательных программах.">
+
     <!-- Критически важный шрифт для заголовков -->
     <link rel="preload" href="{{ url_for('static', filename='fonts/Montserrat-Black.woff2') }}" as="font" type="font/woff2" crossorigin fetchpriority="high">
     <!-- Критически важный шрифт для основного текста -->
@@ -12,6 +14,9 @@
         
     <!-- Оптимизация: Предварительная загрузка основного CSS -->
     <link rel="preload" href="{{ url_for('static', filename='css/style.css') }}" as="style">
+    
+    <!-- Оптимизация: Критически важное изображение первого слайда (Above the Fold) -->
+    <link rel="preload" href="{{ url_for('static', filename='slide1.avif') }}" as="image" fetchpriority="high">
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Гимназия №6 г. Минска">
@@ -63,12 +68,11 @@
         <span>&#9650;</span>
     </button>
     
-    <!-- Изображения в слайдере являются 'Above the Fold' (критически важны для первого экрана), 
-         поэтому им дается fetchpriority="high". Ширина/высота заданы в CSS. -->
-    <section id="hero-slider" class="slider-section" fetchpriority="high">
+    <!-- Изображения в слайдере являются 'Above the Fold' (критически важны для первого экрана).
+         Первое изображение preloaded в <head> с fetchpriority="high". Ширина/высота заданы в CSS. -->
+    <section id="hero-slider" class="slider-section">
         <div class="slider-container">
-            <!-- Здесь фон устанавливается инлайном, потому что это не <img> тег, 
-                 и он критически важен для первого экрана. Оставляем как есть. -->
+            <!-- Здесь фон устанавливается инлайном. -->
             <div class="slide fade" style="background-image: url('static/slide1.avif');"> 
                 <div class="slide-caption">Добро пожаловать в Гимназию №6</div>
             </div>
