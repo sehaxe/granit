@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Гимназия №6 г. Минска</title>
 
-    <!-- Оптимизация: Начинаем соединение с CDN Font Awesome заранее. -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-
-    <!-- Оптимизация: Предварительно загружаем CSS Font Awesome (render-blocking). -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style">
+    <!-- Оптимизация: Предварительно загружаем наши локальные шрифты (Variable Fonts). -->
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Montserrat-VariableFont_wght.ttf') }}" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Merriweather-VariableFont_opsz,wdth,wght.ttf') }}" as="font" type="font/ttf" crossorigin>
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Гимназия №6 г. Минска">
@@ -20,7 +18,6 @@
     <meta property="og:site_name" content="ГУО «Гимназия №6 г. Минска»">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <!-- Favicons and Manifest -->
     <link rel="icon" href="{{ url_for('favicon') }}" type="image/x-icon">
@@ -47,7 +44,8 @@
             Гимназия №6 г. Минска
         </div>
         <button class="hamburger" aria-label="Открыть меню">
-            <i class="fas fa-bars"></i>
+            <!-- Замена: fa-bars на символ бургер-меню -->
+            <span>&#9776;</span> 
         </button>
         <nav class="nav">
             <a href="#about">О гимназии</a>
@@ -59,15 +57,14 @@
     </header>
     
     <button id="scroll-to-top" aria-label="Прокрутить наверх">
-        <i class="fas fa-arrow-up"></i>
+        <!-- Замена: fa-arrow-up на стрелку вверх -->
+        <span>&#9650;</span> 
     </button>
     
     <!-- Изображения в слайдере являются 'Above the Fold' (критически важны для первого экрана), 
          поэтому они остаются БЕЗ lazy loading. -->
     <section id="hero-slider" class="slider-section">
         <div class="slider-container">
-            <!-- Здесь фон устанавливается инлайном, потому что это не <img> тег, 
-                 и он критически важен для первого экрана. Оставляем как есть. -->
             <div class="slide fade" style="background-image: url('static/slide1.avif');"> 
                 <div class="slide-caption">Добро пожаловать в Гимназию №6</div>
             </div>
@@ -121,7 +118,7 @@
             
             <div class="button-container">
                 <a href="/museum-map" class="btn primary-btn">
-                    Интерактивная карта музея <i class="fas fa-map-marked-alt"></i>
+                    Интерактивная карта музея <span class="map-icon">&#10148;</span>
                 </a>
             </div>
         </div>

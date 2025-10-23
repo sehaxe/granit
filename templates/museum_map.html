@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Интерактивная карта и 3D-тур | Музей</title>
 
+    <!-- Оптимизация: Предварительно загружаем наши локальные шрифты (Variable Fonts). -->
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Montserrat-VariableFont_wght.ttf') }}" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Merriweather-VariableFont_opsz,wdth,wght.ttf') }}" as="font" type="font/ttf" crossorigin>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- УДАЛЕНО: <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"> -->
 
     <meta property="og:title" content="Виртуальный 360° Тур по Музею Гимназии №6">
     <meta property="og:description" content="Исследуйте экспозицию музея «Вооруженные Силы Республики Беларусь» в полном 360-градусном формате. Смотрите ключевые экспонаты онлайн!">
@@ -15,6 +19,7 @@
     <meta property="og:image" content="{{ url_for('static', filename='museum-pano-cover.avif', _external=True) }}">
     <meta property="og:site_name" content="ГУО «Гимназия №6 г. Минска»">
     
+    <!-- CSS Pannellum остается, так как он критичен для работы 360-тура -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     
     <link rel="icon" href="{{ url_for('favicon') }}" type="image/x-icon">
@@ -26,7 +31,11 @@
     <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
 
     <style>
-        /* Дополнительные стили для этой страницы */
+        /* Оставлено для немедленной установки smooth-scroll, но рекомендуется перенести в style.css */
+        html { scroll-behavior: smooth; }
+
+        /* Дополнительные стили для этой страницы (перенесены из инлайн-тега, 
+           но по-прежнему рекомендуется перенести в style.css) */
         .map-iframe-container {
             width: 100%;
             max-width: 1200px;
@@ -37,7 +46,6 @@
             position: relative;
         }
 
-        /* Контейнер для панорамы */
         #panorama-viewer {
             width: 100%;
             height: 65vh; 
@@ -55,28 +63,31 @@
             text-align: left;
             font-style: italic;
         }
-        
-        /* Стили для сетки экспонатов - теперь определены в style.css как exhibit-list */
-        
+        .section.exhibits h2 { 
+             text-align: center;
+        }
+        .exhibits p {
+             text-align: center;
+             max-width: 800px;
+        }
     </style>
 </head>
 <body>
     
     <div id="preloader">
-        <div class="loader-ring">
-            <div class="loader-dot"></div>
-            <div class="loader-dot"></div>
-            <div class="loader-dot"></div>
-            <div class="loader-dot"></div>
-        </div>
+        <!-- УДАЛЕНО: loader-ring, loader-dot (т.к. они определены в index.html и могут сбивать с толку) 
+             Возвращаем стандартный лоадер из index.html, который использует spinner -->
+        <div class="loader-spinner"></div>
     </div>
 
     <header class="header">
         <div class="logo">Гимназия №6 г. Минска</div>
         <button class="hamburger" aria-label="Открыть меню">
-            <i class="fas fa-bars"></i>
+            <!-- Замена: fa-bars на символ бургер-меню -->
+            <span>&#9776;</span>
         </button>
         <nav class="nav">
+            <!-- Ссылки ведут на секции главной страницы (через /#) -->
             <a href="/#about">О гимназии</a>
             <a href="/#museum">Музей</a>
             <a href="/museum-map">Интерактивная карта</a>
@@ -97,9 +108,10 @@
                 <div id="panorama-viewer"></div>
             </div>
             
-            <div class="button-container" style="text-align: center; margin-top: 40px;">
+            <div class="button-container">
                 <a href="/#museum" class="btn primary-btn" style="background-color: var(--accent); color: var(--bg-primary);">
-                    <i class="fas fa-arrow-left"></i> Вернуться к информации о музее
+                    <!-- Замена: fa-arrow-left на стрелку влево/назад -->
+                    <span class="back-arrow">&#10094;</span> Вернуться к информации о музее
                 </a>
             </div>
 
@@ -111,14 +123,15 @@
     <section id="exhibits" class="section exhibits">
         <div class="section-content show">
             <h2>Ключевые экспонаты</h2>
-            <p style="text-align: center;">
+            <p>
                 Ниже представлены некоторые из самых значимых и уникальных экспонатов, собранных в нашем музее, с подробными описаниями их истории и значения.
             </p>
 
             <div class="exhibit-list">
                 
                 <div class="exhibit-item">
-                    <img src="{{ url_for('static', filename='exhibit1.avif') }}" alt="Образец военной формы">
+                    <!-- ДОБАВЛЕНО: loading="lazy" -->
+                    <img src="{{ url_for('static', filename='exhibit1.avif') }}" alt="Образец военной формы" loading="lazy">
                     <div class="exhibit-info">
                         <h3>Форма офицера БВО</h3>
                         <p>
@@ -128,7 +141,8 @@
                 </div>
 
                 <div class="exhibit-item">
-                    <img src="{{ url_for('static', filename='exhibit2.avif') }}" alt="Исторические документы">
+                    <!-- ДОБАВЛЕНО: loading="lazy" -->
+                    <img src="{{ url_for('static', filename='exhibit2.avif') }}" alt="Исторические документы" loading="lazy">
                     <div class="exhibit-info">
                         <h3>Исторические документы</h3>
                         <p>
@@ -138,7 +152,8 @@
                 </div>
 
                 <div class="exhibit-item">
-                    <img src="{{ url_for('static', filename='exhibit3.avif') }}" alt="Макет военной техники">
+                    <!-- ДОБАВЛЕНО: loading="lazy" -->
+                    <img src="{{ url_for('static', filename='exhibit3.avif') }}" alt="Макет военной техники" loading="lazy">
                     <div class="exhibit-info">
                         <h3>Макет танка Т-34</h3>
                         <p>
@@ -154,8 +169,8 @@
         <p>&copy; 2025 Гимназия №6 г. Минска. Все права защищены.</p>
     </footer>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-    
+    <!-- Скрипт Pannellum остается для работы 360-тура, т.к. он критичен для этой страницы -->
+    <!-- УДАЛЕНО: Дублирующаяся строка скрипта -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     
     <script>
@@ -163,9 +178,7 @@
         function hidePreloader() {
             const preloader = document.getElementById('preloader');
             if (preloader) {
-                // Добавляем класс, чтобы запустить плавное исчезновение (см. CSS)
                 document.body.classList.add('loaded'); 
-                // Полностью убираем через 500ms (по времени CSS-перехода)
                 setTimeout(() => {
                     preloader.style.display = 'none';
                 }, 500);
@@ -173,7 +186,6 @@
         }
         
         window.onload = function() {
-            // !!! ВАЖНО: ЗАМЕНИТЕ 'museum-pano.avif' НА ИМЯ ВАШЕГО ФАЙЛА
             if (document.getElementById('panorama-viewer')) {
                 // Инициализируем Pannellum (он загружает панораму)
                 const viewer = pannellum.viewer('panorama-viewer', {
@@ -186,15 +198,12 @@
                 });
                 
                 // Скрываем прелоадер после загрузки панорамы 
-                // (Pannellum испускает событие load)
                 viewer.on('load', function() {
                     hidePreloader();
                 });
                 
-                // Дополнительно: если Pannellum не сработает или не будет контейнера, 
-                // скрываем прелоадер через стандартный window.onload (запасной вариант)
-                // Если pannellum не загрузил, сработает, когда загрузятся картинки экспонатов
-                setTimeout(hidePreloader, 2500); // Скрываем через 2.5 секунды, если нет события load
+                // Запасной вариант: если Pannellum не сработает или не будет контейнера.
+                setTimeout(hidePreloader, 2500); 
                 
             } else {
                 // Если контейнера панорамы нет, скрываем по стандартному window.onload
@@ -202,6 +211,7 @@
             }
         };
     </script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script> 
+    <!-- ДОБАВЛЕНО: defer -->
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script> 
 </body>
 </html>
