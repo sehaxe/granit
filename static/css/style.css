@@ -102,33 +102,6 @@ header .logo {
     letter-spacing: 0;
 }
 
-/* Стиль для главного логотипа ВПК */
-.vpk-main-logo {
-    /* ИЗМЕНЕНИЕ: Увеличение max-width в 2 раза с 150px до 300px */
-    max-width: 300px; 
-    height: auto;     
-    margin-bottom: 20px; 
-    box-shadow: var(--shadow-light); 
-    border-radius: 8px; 
-    transition: transform 0.25s ease, box-shadow 0.25s ease; 
-}
-
-.vpk-main-logo:hover {
-    transform: scale(1.03); 
-    box-shadow: var(--shadow-dark); 
-}
-
-/* Адаптация для мобильных устройств, если нужно */
-@media (max-width: 768px) {
-    .vpk-main-logo {
-        /* На мобильных устройствах сохраняем стандартное (или немного увеличенное) значение, 
-           но оно не должно быть 300px, так как это слишком много для узкого экрана. 
-           Оставим здесь, например, 150px, или чуть больше 120px, если бы 120 было базовым. 
-           Оставлю 150px как разумный максимум. */
-        max-width: 150px; 
-    }
-}
-
 .nav a {
     color: var(--bg-secondary);
     text-decoration: none;

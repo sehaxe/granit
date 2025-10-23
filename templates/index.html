@@ -9,7 +9,7 @@
     <meta property="og:description" content="Официальный сайт ГУО «Гимназия №6 г. Минска». Узнайте о нашем военно-патриотическом клубе «Гранит», музее «Вооруженные Силы РБ» и образовательных программах.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url_for('home', _external=True) }}">
-    <meta property="og:image" content="{{ url_for('static', filename='logo_gymn.png', _external=True) }}">
+    <meta property="og:image" content="{{ url_for('static', filename='logo_gymn.avif', _external=True) }}">
     <meta property="og:site_name" content="ГУО «Гимназия №6 г. Минска»">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -55,13 +55,13 @@
     
     <section id="hero-slider" class="slider-section">
         <div class="slider-container">
-            <div class="slide fade" style="background-image: url('static/slide1.jpg');">
+            <div class="slide fade" style="background-image: url('static/slide1.avif');">
                 <div class="slide-caption">Добро пожаловать в Гимназию №6</div>
             </div>
-            <div class="slide fade" style="background-image: url('static/slide2.jpg');">
+            <div class="slide fade" style="background-image: url('static/slide2.avif');">
                 <div class="slide-caption">Высокие стандарты образования</div>
             </div>
-            <div class="slide fade" style="background-image: url('static/slide3.jpg');">
+            <div class="slide fade" style="background-image: url('static/slide3.avif');">
                 <div class="slide-caption">Воспитание патриотов и граждан</div>
             </div>
         </div>
@@ -72,7 +72,7 @@
     <section id="about" class="section about">
         <div class="section-content show">
             <div class="logo-container" style="text-align: center; margin-bottom: 20px;">
-                <img src="{{ url_for('static', filename='logo_gymn.png') }}" alt="Логотип Гимназии №6" class="gymnasium-main-logo" style="max-width: 150px; height: auto;"> 
+                <img src="{{ url_for('static', filename='logo_gymn.avif') }}" alt="Логотип Гимназии №6" class="gymnasium-main-logo" style="max-width: 150px; height: auto;"> 
             </div>
             
             <h1>Гимназия №6 г. Минска</h1>
@@ -97,10 +97,10 @@
                 Музей был открыт в гимназии №6 с целью сохранения памяти о героическом прошлом белорусского народа и воспитания патриотизма.
             </p>
             <div class="gallery">
-                <img src="static/museum1.jpg" alt="Экспонат музея: форма и награды">
-                <img src="static/museum2.jpg" alt="Витрина с историческими документами">
-                <img src="static/museum3.jpg" alt="Оформление экспозиции музея">
-                <img src="static/museum4.jpg" alt="Учащиеся на экскурсии в музее">
+                <img src="static/museum1.avif" alt="Экспонат музея 1">
+                <img src="static/museum2.avif" alt="Экспонат музея 2">
+                <img src="static/museum3.avif" alt="Экспонат музея 3">
+                <img src="static/museum4.avif" alt="Экспонат музея 4">
             </div>
             <p>
                 В экспозиции представлены уникальные <strong>экспонаты</strong>, переданные сотрудниками, родителями учащихся, а также организациями-партнерами. Музей имеет несколько разделов, посвященных <strong>истории белорусской армии</strong>, начиная с 1918 года. Он служит важным центром <strong>музейной педагогики</strong> для формирования у ребят национального стержня, готовности защищать Родину и беречь мир.
@@ -118,17 +118,17 @@
 
     <section id="vpk" class="section vpk">
         <div class="section-content">
-            <h2>Военно-патриотический клуб «Гранит»</h2>
-            
             <div class="logo-container" style="text-align: center; margin-bottom: 20px;">
-                <img src="{{ url_for('static', filename='vpk_logo.jpg') }}" alt="Логотип ВПК «Гранит»" class="vpk-main-logo">
+                <img src="{{ url_for('static', filename='vpk_logo.avif') }}" alt="Логотип ВПК «Гранит»" class="gymnasium-main-logo" style="max-width: 250px; height: auto;"> 
             </div>
+            <h2>Военно-патриотический клуб «Гранит»</h2>
+        </div>
 
             <div class="gallery"> 
-                <img src="{{ url_for('static', filename='granit1.jpg') }}" alt="Фотография отряда «Гранит» 1">
-                <img src="{{ url_for('static', filename='granit2.jpg') }}" alt="Фотография отряда «Гранит» 2">
-                <img src="{{ url_for('static', filename='granit3.jpg') }}" alt="Фотография отряда «Гранит» 3">
-                <img src="{{ url_for('static', filename='granit4.jpg') }}" alt="Фотография отряда «Гранит» 4">
+                <img src="{{ url_for('static', filename='granit1.avif') }}" alt="Фотография отряда «Гранит» 1">
+                <img src="{{ url_for('static', filename='granit2.avif') }}" alt="Фотография отряда «Гранит» 2">
+                <img src="{{ url_for('static', filename='granit3.avif') }}" alt="Фотография отряда «Гранит» 3">
+                <img src="{{ url_for('static', filename='granit4.avif') }}" alt="Фотография отряда «Гранит» 4">
             </div>
             
             <p>

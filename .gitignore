@@ -791,3 +791,6 @@ venv/lib/python3.9/site-packages/zipp-3.23.0.dist-info/top_level.txt
 venv/lib/python3.9/site-packages/zipp-3.23.0.dist-info/WHEEL
 venv/lib/python3.9/site-packages/zipp-3.23.0.dist-info/licenses/LICENSE
 __pycache__/app.cpython-313.pyc
+static/vpk_logo.jpg~
+.gitignore
+.gitignore

@@ -12,7 +12,7 @@
     <meta property="og:description" content="Исследуйте экспозицию музея «Вооруженные Силы Республики Беларусь» в полном 360-градусном формате. Смотрите ключевые экспонаты онлайн!">
     <meta property="og:type" content="article"> 
     <meta property="og:url" content="{{ url_for('museum_map', _external=True) }}">
-    <meta property="og:image" content="{{ url_for('static', filename='museum-pano-cover.jpg', _external=True) }}">
+    <meta property="og:image" content="{{ url_for('static', filename='museum-pano-cover.avif', _external=True) }}">
     <meta property="og:site_name" content="ГУО «Гимназия №6 г. Минска»">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
@@ -118,7 +118,7 @@
             <div class="exhibit-list">
                 
                 <div class="exhibit-item">
-                    <img src="{{ url_for('static', filename='exhibit1.png') }}" alt="Образец военной формы">
+                    <img src="{{ url_for('static', filename='exhibit1.avif') }}" alt="Образец военной формы">
                     <div class="exhibit-info">
                         <h3>Форма офицера БВО</h3>
                         <p>
@@ -128,7 +128,7 @@
                 </div>
 
                 <div class="exhibit-item">
-                    <img src="{{ url_for('static', filename='exhibit2.png') }}" alt="Исторические документы">
+                    <img src="{{ url_for('static', filename='exhibit2.avif') }}" alt="Исторические документы">
                     <div class="exhibit-info">
                         <h3>Исторические документы</h3>
                         <p>
@@ -138,7 +138,7 @@
                 </div>
 
                 <div class="exhibit-item">
-                    <img src="{{ url_for('static', filename='exhibit3.png') }}" alt="Макет военной техники">
+                    <img src="{{ url_for('static', filename='exhibit3.avif') }}" alt="Макет военной техники">
                     <div class="exhibit-info">
                         <h3>Макет танка Т-34</h3>
                         <p>
@@ -173,12 +173,12 @@
         }
         
         window.onload = function() {
-            // !!! ВАЖНО: ЗАМЕНИТЕ 'museum-pano.jpg' НА ИМЯ ВАШЕГО ФАЙЛА
+            // !!! ВАЖНО: ЗАМЕНИТЕ 'museum-pano.avif' НА ИМЯ ВАШЕГО ФАЙЛА
             if (document.getElementById('panorama-viewer')) {
                 // Инициализируем Pannellum (он загружает панораму)
                 const viewer = pannellum.viewer('panorama-viewer', {
                     "type": "equirectangular",
-                    "panorama": "{{ url_for('static', filename='museum-pano.jpg') }}", 
+                    "panorama": "{{ url_for('static', filename='museum-sphere.avif') }}", 
                     "autoLoad": true,
                     "compass": true,
                     "hfov": 100, 
