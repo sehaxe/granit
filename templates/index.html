@@ -7,18 +7,14 @@
 
     <meta name="description" content="Официальный сайт ГУО «Гимназия №6 г. Минска». Узнайте о нашем военно-патриотическом клубе «Гранит», музее «Вооруженные Силы РБ» и образовательных программах.">
 
-    <!-- Критически важный шрифт для заголовков -->
     <link rel="preload" href="{{ url_for('static', filename='fonts/Montserrat-Black.woff2') }}" as="font" type="font/woff2" crossorigin fetchpriority="high">
-    <!-- Критически важный шрифт для основного текста -->
+
     <link rel="preload" href="{{ url_for('static', filename='fonts/Merriweather-Regular.woff2') }}" as="font" type="font/woff2" crossorigin fetchpriority="high">
         
-    <!-- Оптимизация: Предварительная загрузка основного CSS -->
     <link rel="preload" href="{{ url_for('static', filename='css/style.css') }}" as="style">
     
-    <!-- Оптимизация: Критически важное изображение первого слайда (Above the Fold) -->
     <link rel="preload" href="{{ url_for('static', filename='slide1.avif') }}" as="image" fetchpriority="high">
     
-    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Гимназия №6 г. Минска">
     <meta property="og:description" content="Официальный сайт ГУО «Гимназия №6 г. Минска». Узнайте о нашем военно-патриотическом клубе «Гранит», музее «Вооруженные Силы РБ» и образовательных программах.">
     <meta property="og:type" content="website">
@@ -28,7 +24,6 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     
-    <!-- Favicons and Manifest -->
     <link rel="icon" href="{{ url_for('favicon') }}" type="image/x-icon">
     <link rel="icon" sizes="16x16" href="{{ url_for('favicon_16') }}" type="image/png">
     <link rel="icon" sizes="32x32" href="{{ url_for('favicon_32') }}" type="image/png">
@@ -38,7 +33,6 @@
     <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
     
     <style>
-        /* Оставлено для немедленной установки smooth-scroll, но рекомендуется перенести в style.css */
         html { scroll-behavior: smooth; }
     </style>
 </head>
@@ -68,11 +62,8 @@
         <span>&#9650;</span>
     </button>
     
-    <!-- Изображения в слайдере являются 'Above the Fold' (критически важны для первого экрана).
-         Первое изображение preloaded в <head> с fetchpriority="high". Ширина/высота заданы в CSS. -->
     <section id="hero-slider" class="slider-section">
         <div class="slider-container">
-            <!-- Здесь фон устанавливается инлайном. -->
             <div class="slide fade" style="background-image: url('static/slide1.avif');"> 
                 <div class="slide-caption">Добро пожаловать в Гимназию №6</div>
             </div>
@@ -80,7 +71,7 @@
                 <div class="slide-caption">Высокие стандарты образования</div>
             </div>
             <div class="slide fade" style="background-image: url('static/slide3.avif');">
-                <div class="slide-caption">Воспитание патриотов и граждан</div>
+                <div class="slide-caption">Патриотическое воспитание молодежи</div>
             </div>
         </div>
         <div class="slider-dots-container">
@@ -91,7 +82,6 @@
         <section id="about" class="section about">
             <div class="section-content show">
                 <div class="logo-container">
-                    <!-- ЗАМЕНИТЕ width/height на реальные размеры логотипа (Критично для CLS) -->
                     <img src="{{ url_for('static', filename='logo_gymn.avif') }}" alt="Логотип Гимназии №6" class="gymnasium-main-logo" width="150" height="150" loading="lazy"> 
                 </div>
                 
@@ -101,7 +91,7 @@
                 </p>
                 <p>
                     Гимназия располагается в трех учебных корпусах в Советском районе столицы. Учреждение активно развивает систему <strong>идеологической и воспитательной работы</strong>. На базе гимназии существуют такие структуры, как <strong>отряд БРПО имени Зинаиды Портновой</strong>, <strong>военно-патриотический клуб «Гранит»</strong>,
-                 <strong>первичная организация ОО БРСМ Гимназии № 6 г. Минска</strong>, <strong>первичная организация РОО "Белая Русь" ГУО "Гимназии N6"</strong>.</p>
+                 <strong>первичная организация ОО БРСМ Гимназии № 6 г. Минска</strong>, <strong>первичная организация РОО «Белая Русь» ГУО «Гимназии N6»</strong>.</p>
                 <p>
                     <strong>Руководителем по военно-патриотическому воспитанию</strong> в гимназии является полковник запаса Вооруженных Сил Республики Беларусь <strong>Халипов Сергей Сергеевич</strong>. Руководитель по военно-патриотическому воспитанию является руководителем ВПК «Гранит», ответственным за военно-патриотическое воспитание молодежи, а также за функционирование музея.
                 </p>
@@ -139,7 +129,6 @@
         <section id="vpk" class="section vpk">
             <div class="section-content">
                 <div class="logo-container">
-                    <!-- ЗАМЕНИТЕ width/height на реальные размеры логотипа -->
                     <img src="{{ url_for('static', filename='vpk_logo.avif') }}" alt="Логотип ВПК «Гранит»" class="gymnasium-main-logo" width="250" height="150" loading="lazy"> 
                 </div>
                 <h2>Военно-патриотический клуб «Гранит»</h2>
@@ -207,9 +196,6 @@
     <footer class="footer">
         <p>&copy; 2025 Гимназия №6 г. Минска. Все права защищены.</p>
     </footer>
-
-    <!-- Оптимизация: Атрибут 'defer' гарантирует, что HTML будет полностью обработан 
-         до выполнения скрипта, предотвращая блокировку рендеринга. -->
     <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 </body>
 </html>
