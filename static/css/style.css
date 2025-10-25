@@ -1,5 +1,34 @@
 /* --- СКАЧАННЫЕ ЛОКАЛЬНЫЕ ШРИФТЫ (@font-face) --- */
+/* Подменю подразделов */
+.subnav {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0 30px;
+    flex-wrap: wrap;
+}
+.subnav a {
+    text-decoration: none;
+    color: #1a365d;
+    font-weight: 600;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+.subnav a:hover {
+    background-color: #f0f4ff;
+}
 
+/* Стиль подразделов */
+.subsection {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+.subsection h3 {
+    color: #2c5282;
+    margin-bottom: 16px;
+}
 /* 1. Montserrat Bold (700) */
 @font-face {
   font-family: 'Montserrat';
