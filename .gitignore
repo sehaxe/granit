@@ -794,3 +794,4 @@ __pycache__/app.cpython-313.pyc
 static/vpk_logo.jpg~
 .gitignore
 .gitignore
+winboat/*
